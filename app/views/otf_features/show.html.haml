@@ -1,0 +1,10 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), otf_features_path
+  = link_to t('edit'), edit_otf_feature_path(@otf_feature)
+
+%dl
+  %dt= OtfFeature.human_attribute_name :name
+  %dd= @otf_feature.name
+  %dt= OtfFeature.human_attribute_name :script
+  %dd= @otf_feature.script

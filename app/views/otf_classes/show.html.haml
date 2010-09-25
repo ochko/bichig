@@ -1,0 +1,8 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), otf_classes_path
+  = link_to t('edit'), edit_otf_class_path(@otf_class)
+
+%dl
+  %dt= OtfClass.human_attribute_name :name
+  %dd= @otf_class.name

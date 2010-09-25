@@ -1,0 +1,10 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), open_type_fonts_path
+  = link_to t('edit'), edit_open_type_font_path(@open_type_font)
+
+%dl
+  %dt= OpenTypeFont.human_attribute_name :name
+  %dd= @open_type_font.name
+  %dt= OpenTypeFont.human_attribute_name :source
+  %dd= @open_type_font.source

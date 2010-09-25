@@ -1,0 +1,3 @@
+[submodule "lib/mongolian-script"]
+	path = lib/mongolian-script
+	url = git@github.com:ochko/mongolian-script.git

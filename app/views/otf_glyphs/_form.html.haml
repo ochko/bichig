@@ -1,0 +1,19 @@
+= form_for(@otf_glyph) do |f|
+  - if @otf_glyph.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@otf_glyph.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @otf_glyph.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :image
+    %br
+    = f.text_field :image
+
+  .actions
+    = f.submit

@@ -1,0 +1,23 @@
+= form_for(@otf_lookup) do |f|
+  - if @otf_lookup.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@otf_lookup.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @otf_lookup.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :feature_id
+    %br
+    = f.text_field :feature_id
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :flag
+    %br
+    = f.text_field :flag
+
+  .actions
+    = f.submit

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  feature_id: 1
+  name: MyString
+  flag: MyString
+
+two:
+  feature_id: 1
+  name: MyString
+  flag: MyString

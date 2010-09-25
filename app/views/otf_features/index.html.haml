@@ -1,0 +1,18 @@
+%h1= t('.title')
+%p= link_to t('.new_otf_feature'), new_otf_feature_path
+
+%table
+  %thead
+    %tr
+      %th= OtfFeature.human_attribute_name :name
+      %th= OtfFeature.human_attribute_name :script
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for otf_feature in @otf_features
+      %tr{ :class => cycle(:odd, :even) }
+        %td= otf_feature.name
+        %td= otf_feature.script
+        %td.action= link_to t('show'), otf_feature
+        %td.action= link_to t('edit'), edit_otf_feature_path(otf_feature)
+        %td.action= link_to t('destroy'), otf_feature, :confirm => t('are_you_sure'), :method => :delete

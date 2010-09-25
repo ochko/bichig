@@ -1,0 +1,20 @@
+%h1= t('.title')
+%p= link_to t('.new_otf_lookup'), new_otf_lookup_path
+
+%table
+  %thead
+    %tr
+      %th= OtfLookup.human_attribute_name :feature_id
+      %th= OtfLookup.human_attribute_name :name
+      %th= OtfLookup.human_attribute_name :flag
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for otf_lookup in @otf_lookups
+      %tr{ :class => cycle(:odd, :even) }
+        %td= otf_lookup.feature_id
+        %td= otf_lookup.name
+        %td= otf_lookup.flag
+        %td.action= link_to t('show'), otf_lookup
+        %td.action= link_to t('edit'), edit_otf_lookup_path(otf_lookup)
+        %td.action= link_to t('destroy'), otf_lookup, :confirm => t('are_you_sure'), :method => :delete

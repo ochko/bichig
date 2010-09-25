@@ -1,0 +1,22 @@
+%h1= t('.title')
+%p= link_to t('.new_otf_unicode'), new_otf_unicode_path
+
+%table
+  %thead
+    %tr
+      %th= OtfUnicode.human_attribute_name :hex
+      %th= OtfUnicode.human_attribute_name :dec
+      %th= OtfUnicode.human_attribute_name :name
+      %th= OtfUnicode.human_attribute_name :image
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for otf_unicode in @otf_unicodes
+      %tr{ :class => cycle(:odd, :even) }
+        %td= otf_unicode.hex
+        %td= otf_unicode.dec
+        %td= otf_unicode.name
+        %td= otf_unicode.image
+        %td.action= link_to t('show'), otf_unicode
+        %td.action= link_to t('edit'), edit_otf_unicode_path(otf_unicode)
+        %td.action= link_to t('destroy'), otf_unicode, :confirm => t('are_you_sure'), :method => :delete

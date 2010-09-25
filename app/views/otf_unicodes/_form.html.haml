@@ -1,0 +1,27 @@
+= form_for(@otf_unicode) do |f|
+  - if @otf_unicode.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@otf_unicode.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @otf_unicode.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :hex
+    %br
+    = f.text_field :hex
+  .field
+    = f.label :dec
+    %br
+    = f.text_field :dec
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :image
+    %br
+    = f.text_field :image
+
+  .actions
+    = f.submit

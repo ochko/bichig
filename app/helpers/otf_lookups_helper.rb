@@ -1,0 +1,2 @@
+module OtfLookupsHelper
+end

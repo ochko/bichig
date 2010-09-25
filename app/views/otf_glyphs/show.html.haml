@@ -1,0 +1,10 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), otf_glyphs_path
+  = link_to t('edit'), edit_otf_glyph_path(@otf_glyph)
+
+%dl
+  %dt= OtfGlyph.human_attribute_name :name
+  %dd= @otf_glyph.name
+  %dt= OtfGlyph.human_attribute_name :image
+  %dd= @otf_glyph.image

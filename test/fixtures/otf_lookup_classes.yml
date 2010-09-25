@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  lookup_id: 1
+  class_id: 1
+  position: 1
+  replace_flag: 1
+
+two:
+  lookup_id: 1
+  class_id: 1
+  position: 1
+  replace_flag: 1

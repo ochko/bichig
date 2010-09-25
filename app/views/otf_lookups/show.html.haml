@@ -1,0 +1,12 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), otf_lookups_path
+  = link_to t('edit'), edit_otf_lookup_path(@otf_lookup)
+
+%dl
+  %dt= OtfLookup.human_attribute_name :feature_id
+  %dd= @otf_lookup.feature_id
+  %dt= OtfLookup.human_attribute_name :name
+  %dd= @otf_lookup.name
+  %dt= OtfLookup.human_attribute_name :flag
+  %dd= @otf_lookup.flag

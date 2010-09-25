@@ -1,0 +1,18 @@
+%h1= t('.title')
+%p= link_to t('.new_open_type_font'), new_open_type_font_path
+
+%table
+  %thead
+    %tr
+      %th= OpenTypeFont.human_attribute_name :name
+      %th= OpenTypeFont.human_attribute_name :source
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for open_type_font in @open_type_fonts
+      %tr{ :class => cycle(:odd, :even) }
+        %td= open_type_font.name
+        %td= open_type_font.source
+        %td.action= link_to t('show'), open_type_font
+        %td.action= link_to t('edit'), edit_open_type_font_path(open_type_font)
+        %td.action= link_to t('destroy'), open_type_font, :confirm => t('are_you_sure'), :method => :delete

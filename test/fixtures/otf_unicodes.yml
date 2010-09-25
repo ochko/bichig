@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  hex: MyString
+  dec: 1
+  name: MyString
+  image: 
+
+two:
+  hex: MyString
+  dec: 1
+  name: MyString
+  image: 

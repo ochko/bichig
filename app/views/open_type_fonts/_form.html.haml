@@ -1,0 +1,19 @@
+= form_for(@open_type_font) do |f|
+  - if @open_type_font.errors.any?
+    #errorExplanation
+      %h2= "#{pluralize(@open_type_font.errors.count, 'error')} prohibited this user from being saved:"
+      %ul
+      - @open_type_font.errors.full_messages.each do |msg|
+        %li= msg
+  
+  .field
+    = f.label :name
+    %br
+    = f.text_field :name
+  .field
+    = f.label :source
+    %br
+    = f.text_field :source
+
+  .actions
+    = f.submit

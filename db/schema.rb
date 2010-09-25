@@ -10,6 +10,64 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20100925192750) do
+
+  create_table "open_type_fonts", :force => true do |t|
+    t.string   "name"
+    t.string   "source_file_name"
+    t.string   "source_content_type"
+    t.integer  "source_file_size"
+    t.datetime "source_updated_at"
+  end
+
+  create_table "otf_classes", :force => true do |t|
+    t.string  "name"
+    t.integer "open_type_font_id", :null => false
+  end
+
+  create_table "otf_features", :force => true do |t|
+    t.integer  "open_type_font_id"
+    t.string   "name"
+    t.string   "script"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "otf_glyphs", :force => true do |t|
+    t.integer  "open_type_font_id"
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "otf_lookup_classes", :force => true do |t|
+    t.integer  "otf_lookup_id"
+    t.integer  "otf_class_id"
+    t.integer  "position"
+    t.integer  "replace_flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "otf_lookups", :force => true do |t|
+    t.integer  "feature_id"
+    t.string   "name"
+    t.string   "flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "otf_unicodes", :force => true do |t|
+    t.integer  "open_type_font"
+    t.string   "hex"
+    t.integer  "dec"
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
 
 end

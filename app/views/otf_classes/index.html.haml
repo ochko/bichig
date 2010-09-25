@@ -1,0 +1,16 @@
+%h1= t('.title')
+%p= link_to t('.new_otf_class'), new_otf_class_path
+
+%table
+  %thead
+    %tr
+      %th= OtfClass.human_attribute_name :name
+      %th{:colspan => 3}= t 'actions'
+  
+  %tbody
+    - for otf_class in @otf_classes
+      %tr{ :class => cycle(:odd, :even) }
+        %td= otf_class.name
+        %td.action= link_to t('show'), otf_class
+        %td.action= link_to t('edit'), edit_otf_class_path(otf_class)
+        %td.action= link_to t('destroy'), otf_class, :confirm => t('are_you_sure'), :method => :delete
