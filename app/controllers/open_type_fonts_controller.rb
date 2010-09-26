@@ -3,17 +3,15 @@ class OpenTypeFontsController < ApplicationController
   # GET /open_type_fonts.xml
   def index
     @open_type_fonts = OpenTypeFont.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @open_type_fonts }
+    if @open_type_fonts.size == 1
+      redirect_to @open_type_fonts.first
     end
   end
 
   # GET /open_type_fonts/1
   # GET /open_type_fonts/1.xml
   def show
-    @open_type_font = OpenTypeFont.find(params[:id])
+    @open_type_font = OpenTypeFont.find(params[:id], :include => :features)
 
     respond_to do |format|
       format.html # show.html.erb

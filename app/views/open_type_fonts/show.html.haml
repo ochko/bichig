@@ -1,10 +1,9 @@
-%h1= t '.title'
+%h1= @open_type_font.name
 %p
-  = link_to t('back'), open_type_fonts_path
   = link_to t('edit'), edit_open_type_font_path(@open_type_font)
 
-%dl
-  %dt= OpenTypeFont.human_attribute_name :name
-  %dd= @open_type_font.name
-  %dt= OpenTypeFont.human_attribute_name :source
-  %dd= @open_type_font.source
+- @open_type_font.features.each do |feature|
+  - unless feature.lookups.empty?
+    %h3= feature.title || feature.name 
+    - feature.lookups.each do |lookup|
+      = link_to lookup.name, lookup
