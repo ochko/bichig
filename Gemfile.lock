@@ -96,4 +96,6 @@ DEPENDENCIES
   gravtastic
   haml
   mysql2
+  polyglot
   rails (= 3.0.0)
+  treetop

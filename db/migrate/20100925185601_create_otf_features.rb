@@ -2,6 +2,7 @@ class CreateOtfFeatures < ActiveRecord::Migration
   def self.up
     create_table :otf_features do |t|
       t.integer  :open_type_font_id
+      t.integer :parent_id
       t.string :name
       t.string :script
 

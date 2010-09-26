@@ -12,7 +12,7 @@
   %tbody
     - for otf_lookup in @otf_lookups
       %tr{ :class => cycle(:odd, :even) }
-        %td= otf_lookup.feature_id
+        %td= otf_lookup.feature.name
         %td= otf_lookup.name
         %td= otf_lookup.flag
         %td.action= link_to t('show'), otf_lookup

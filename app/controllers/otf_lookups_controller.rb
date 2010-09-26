@@ -2,7 +2,7 @@ class OtfLookupsController < ApplicationController
   # GET /otf_lookups
   # GET /otf_lookups.xml
   def index
-    @otf_lookups = OtfLookup.all
+    @otf_lookups = OtfLookup.all(:include => :feature)
 
     respond_to do |format|
       format.html # index.html.erb

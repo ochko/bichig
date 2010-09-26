@@ -6,3 +6,5 @@ config/database.yml
 config/deploy.rb
 backup
 public/system
+public/images/glyphs
+lib/mongolian-script/*

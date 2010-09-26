@@ -54,3 +54,10 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+.sub {
+    background-color: #eaa;
+}
+.by {
+     background-color: #aea;
+}

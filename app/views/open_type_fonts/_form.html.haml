@@ -1,7 +1,7 @@
-= form_for(@open_type_font) do |f|
+= form_for(@open_type_font, :html => { :multipart => true }) do |f|
   - if @open_type_font.errors.any?
     #errorExplanation
-      %h2= "#{pluralize(@open_type_font.errors.count, 'error')} prohibited this user from being saved:"
+      %h2= "#{pluralize(@open_type_font.errors.count, 'error')} prohibited this font from being saved:"
       %ul
       - @open_type_font.errors.full_messages.each do |msg|
         %li= msg
@@ -13,7 +13,7 @@
   .field
     = f.label :source
     %br
-    = f.text_field :source
+    = f.file_field :source
 
   .actions
     = f.submit

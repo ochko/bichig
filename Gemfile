@@ -8,6 +8,10 @@ gem 'devise'
 gem 'haml'
 gem 'gravtastic'
 
+# For feature parser
+gem 'treetop'
+gem 'polyglot'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
