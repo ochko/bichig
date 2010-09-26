@@ -10,17 +10,26 @@
   %dd= @otf_lookup.name
   %dt= OtfLookup.human_attribute_name :flag
   %dd= @otf_lookup.flag
+  %dt= OtfLookup.human_attribute_name :language
+  %dd= @otf_lookup.language.code if @otf_lookup.language
 
 %table
   - @otf_lookup.otf_lookup_rows.each do |row|
-    %tr
+    %tr.row{:id => "row#{row.id}"}
+      %td= link_to 'See', otf_lookup_otf_lookup_row_path(@otf_lookup, row)
       - row.lookup_classes.each do |klass|
         %td{:class => klass.kind}
           - if klass.otf_class.name
-            = klass.otf_class.name
+            %table
+              %tr
+                %td= link_to klass.otf_class.name, otf_class_path(klass.otf_class.name), :target => 'classes'
           - else
             %table
               - klass.otf_class.otf_glyphs.each do |glyph|
                 %tr
                   %td= image_tag("/system/glyphs/#{glyph.name}.png")
                   %td= glyph.name
+      %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(@otf_lookup, row)
+      %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(@otf_lookup, row), :method => :delete, :remote => true
+
+= link_to "Add New Row", new_otf_lookup_otf_lookup_row_path(@otf_lookup)

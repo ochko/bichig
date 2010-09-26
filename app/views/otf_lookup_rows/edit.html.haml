@@ -1,0 +1,33 @@
+%h1= "Lookup: %s" % (@otf_lookup.name || @otf_lookup.feature.name)
+%p
+  = link_to t('back'), @otf_lookup
+
+%dl
+  %dt= OtfLookup.human_attribute_name :feature_id
+  %dd= @otf_lookup.feature.name
+  %dt= OtfLookup.human_attribute_name :name
+  %dd= @otf_lookup.name
+  %dt= OtfLookup.human_attribute_name :flag
+  %dd= @otf_lookup.flag
+  %dt= OtfLookup.human_attribute_name :language
+  %dd= @otf_lookup.language.code if @otf_lookup.language
+
+%table
+  %tr#klasses= render :partial => 'otf_lookup_classes/klass', :collection => @row.lookup_classes
+
+= form_for(@row.lookup_classes.build, :remote => true) do |f|
+  = f.hidden_field :otf_lookup_row_id
+  = f.hidden_field :otf_lookup_id, :value => @otf_lookup.id
+  = text_area_tag "klass"
+  %br
+  = f.radio_button  "replace_flag", OtfLookupClass::FLAGS[:sub]
+  Substitute
+  %br
+  = f.radio_button  "replace_flag", OtfLookupClass::FLAGS[:by]
+  By
+  %br
+  = f.radio_button  "replace_flag", OtfLookupClass::FLAGS[:reserve]
+  Reserve
+  
+  .actions
+    = f.submit "Add"

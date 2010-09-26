@@ -61,3 +61,7 @@ div.field, div.actions {
 .by {
      background-color: #aea;
 }
+.row > td{
+    border:1px solid #666;
+    padding: 2px;
+}

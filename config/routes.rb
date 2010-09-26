@@ -1,5 +1,9 @@
 Bichig::Application.routes.draw do
-  resources :otf_lookups
+  resources :otf_lookup_classes
+
+  resources :otf_lookups do
+    resources :otf_lookup_rows
+  end
 
   resources :otf_features
 

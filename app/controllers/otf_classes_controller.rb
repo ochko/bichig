@@ -13,7 +13,12 @@ class OtfClassesController < ApplicationController
   # GET /otf_classes/1
   # GET /otf_classes/1.xml
   def show
-    @otf_class = OtfClass.find(params[:id])
+    if params[:id] =~ /^@/
+      @otf_class = OtfClass.find_by_name(params[:id])
+    else
+      @otf_class = OtfClass.find(params[:id])
+    end
+    
 
     respond_to do |format|
       format.html # show.html.erb

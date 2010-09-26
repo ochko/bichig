@@ -1,0 +1,2 @@
+module OtfLookupClassesHelper
+end

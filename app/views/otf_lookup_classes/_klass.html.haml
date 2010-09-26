@@ -1,0 +1,18 @@
+%td{:class => klass.kind}
+  - if klass.otf_class.name
+    %table
+      %tr
+        %td 
+          = klass.otf_class.name
+          - if @expand_classes
+            %table
+              - klass.otf_class.otf_glyphs.each do |glyph|
+                %tr
+                  %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                  %td= glyph.name
+  - else
+    %table
+      - klass.otf_class.otf_glyphs.each do |glyph|
+        %tr
+          %td= image_tag("/system/glyphs/#{glyph.name}.png")
+          %td= glyph.name
