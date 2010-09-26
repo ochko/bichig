@@ -4,6 +4,10 @@ class OtfLookupClass < ActiveRecord::Base
   belongs_to :otf_class
   belongs_to :otf_lookup_row
   
+  def after_save
+    self.otf_lookup.touch
+  end
+  
   def substitute?
     self.replace_flag == FLAGS[:sub]
   end
@@ -19,6 +23,22 @@ class OtfLookupClass < ActiveRecord::Base
     elsif by?
       'by'
     end
+  end
+
+  def to_s
+    output = ""
+    if otf_class.name
+      output << otf_class.name
+    else
+      output << otf_class.otf_glyphs.map{|g| g.name}.join(" ")
+      if otf_class.otf_glyphs.size > 1
+        output = "[#{output}]"
+      end
+    end
+    if substitute?
+      output << "'"
+    end
+    output    
   end
 
   def self.build(row, group_body)

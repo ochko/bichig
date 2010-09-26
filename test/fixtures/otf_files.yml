@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  font_id: 1
+  version: MyString
+  title: MyString
+
+two:
+  font_id: 1
+  version: MyString
+  title: MyString

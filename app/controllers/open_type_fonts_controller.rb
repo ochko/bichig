@@ -67,15 +67,18 @@ class OpenTypeFontsController < ApplicationController
     end
   end
 
-  # DELETE /open_type_fonts/1
-  # DELETE /open_type_fonts/1.xml
-  def destroy
-    @open_type_font = OpenTypeFont.find(params[:id])
-    @open_type_font.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(open_type_fonts_url) }
-      format.xml  { head :ok }
+  def compile
+    @font = OpenTypeFont.find(params[:id])
+    if @font.compiled?
+      @file = @font.files.last
+    else
+      @file = @font.compile!
+    end
+    if @file
+      redirect_to open_type_font_otf_file_path(@font, @file)
+    else
+      flash[:error] = "Error occured!"
+      redirect_to @font
     end
   end
 end

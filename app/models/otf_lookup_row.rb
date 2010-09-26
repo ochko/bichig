@@ -14,4 +14,10 @@ class OtfLookupRow < ActiveRecord::Base
     row.lookup_classes << lookup_class
     row
   end
+  
+  def to_s
+    sub_part = lookup_classes
+    by_part = sub_part.pop
+    "\t\tsub #{sub_part.map{|c| c.to_s}.join(' ')} by #{by_part.to_s};\n"
+  end
 end

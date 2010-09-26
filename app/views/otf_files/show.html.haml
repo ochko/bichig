@@ -1,0 +1,15 @@
+%h1= @file.font.name
+
+%dl
+  %dt= OtfFile.human_attribute_name :version
+  %dd= @file.version 
+  
+- if @file.has_source?
+  %dl
+    %dt= OtfFile.human_attribute_name :source
+    %dd= link_to "Source", source_url(@file)
+
+- if @file.has_binary?
+  %dl
+    %dt= OtfFile.human_attribute_name :binary
+    %dd= link_to "Binary", binary_url(@file)

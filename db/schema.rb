@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100926051328) do
+ActiveRecord::Schema.define(:version => 20100926171457) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20100926051328) do
     t.string   "source_content_type"
     t.integer  "source_file_size"
     t.datetime "source_updated_at"
+    t.datetime "compiled_at"
   end
 
   create_table "otf_classes", :force => true do |t|
@@ -49,6 +50,16 @@ ActiveRecord::Schema.define(:version => 20100926051328) do
     t.datetime "updated_at"
     t.string   "title"
   end
+
+  create_table "otf_files", :force => true do |t|
+    t.integer  "font_id",    :null => false
+    t.string   "version",    :null => false
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "otf_files", ["version"], :name => "index_otf_files_on_version", :unique => true
 
   create_table "otf_glyphs", :force => true do |t|
     t.integer  "open_type_font_id"

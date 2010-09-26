@@ -1,5 +1,6 @@
 %h1= @open_type_font.name
 %p
+  = link_to t('compile'), compile_open_type_font_path(@open_type_font)
   = link_to t('edit'), edit_open_type_font_path(@open_type_font)
 
 - @open_type_font.features.each do |feature|

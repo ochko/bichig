@@ -5,10 +5,35 @@ class OpenTypeFont < ActiveRecord::Base
   has_many :unicodes, :class_name => OtfUnicode.name
   has_many :classes , :class_name => OtfClass.name
   has_many :features, :class_name => OtfFeature.name
+  has_many :lookups,  :through => :features
+  has_many :files,    :class_name => OtfFile.name, :foreign_key => 'font_id'
 
   has_attached_file :source
 
   validates_length_of :name, :minimum => 2
+
+  def last_lookup_update
+    self.lookups.maximum(:updated_at)
+  end
+
+  def compiled?
+    self.last_lookup_update && self.compiled_at &&
+      (self.last_lookup_update < self.compiled_at)
+  end
+
+  def compiled!
+    self.update_attribute(:compiled_at, Time.now)
+  end
+
+  def compile!
+    file = OtfFile.generate_source_and_compile(self)
+    self.compiled! if file
+    file
+  end
+
+  def to_s
+    "#{classes.named.join}\n\n#{features.join}\n\n"
+  end
 
   def populate_from_source
     file_content = '';
@@ -49,14 +74,14 @@ class OpenTypeFont < ActiveRecord::Base
             
             if body[:lookup_flag]
               if dummy_lookup.nil?
-                dummy_lookup = feature.lookups.new(feature.name)
+                dummy_lookup = feature.lookups.new(:name => feature.name)
               end
               dummy_lookup.flag = body[:lookup_flag]
             end
             
             if body[:subtable]
               if dummy_lookup.nil?
-                dummy_lookup = feature.lookups.new(feature.name)
+                dummy_lookup = feature.lookups.new(:name => feature.name)
               end
               OtfLookupRow.build(dummy_lookup, body[:subtable])
             end

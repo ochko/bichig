@@ -8,4 +8,11 @@ class OtfLookup < ActiveRecord::Base
   def before_save
     self.font_id = self.feature.open_type_font_id
   end
+
+  def to_s
+    output = "\tlookup #{name} {\n"
+    output << "\t\tlookupflag #{flag};\n" if flag
+    output << otf_lookup_rows.join
+    output << "\t} #{name};\n"
+  end
 end

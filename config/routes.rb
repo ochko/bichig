@@ -3,7 +3,12 @@ Bichig::Application.routes.draw do
 
   resources :otf_features
 
-  resources :open_type_fonts
+  resources :open_type_fonts do
+    member do 
+      get 'compile'
+    end
+    resources :otf_files
+  end
 
   resources :otf_unicodes
 
