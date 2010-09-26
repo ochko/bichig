@@ -2,6 +2,7 @@ class OtfLookupRow < ActiveRecord::Base
   belongs_to :lookup, :class_name => OtfLookup.name
   has_many :lookup_classes, :class_name => OtfLookupClass.name, :include => :otf_class, :dependent => :destroy
   has_many :otf_classes, :through => :lookup_classes
+  belongs_to :user
   
   def self.build(lookup, body)
     row = self.create(:lookup => lookup)

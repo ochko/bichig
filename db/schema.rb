@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100926223814) do
+ActiveRecord::Schema.define(:version => 20100926232142) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20100926223814) do
     t.integer  "lookup_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "otf_lookups", :force => true do |t|

@@ -31,5 +31,6 @@
                   %td= glyph.name
       %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(@otf_lookup, row)
       %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(@otf_lookup, row), :method => :delete, :remote => true
+      %td.user{:title => 'Засварласан'}= row.user
 
 = link_to "Add New Row", new_otf_lookup_otf_lookup_row_path(@otf_lookup)
