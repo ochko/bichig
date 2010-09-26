@@ -1,4 +1,6 @@
 Bichig::Application.routes.draw do
+  devise_for :users
+
   resources :otf_lookup_classes
 
   resources :otf_lookups do

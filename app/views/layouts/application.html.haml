@@ -6,4 +6,19 @@
     = javascript_include_tag :all
     = csrf_meta_tag
   %body
+    #account
+      - if user_signed_in?
+        = 'signed in'
+        %strong= current_user.name
+        |
+        = link_to "sign out", destroy_user_session_path  
+      - else
+        = link_to "sign up", new_user_registration_path
+        |  
+        = link_to "login", new_user_session_path
+    #menu
+      %ul
+        %li= link_to "Home", root_path
+    .notice= notice
+    .alert= alert
     = yield

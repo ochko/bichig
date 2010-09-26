@@ -36,7 +36,7 @@ Bichig::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.default_url_options = { :host => 'bichig.query.mn' }
   # Enable threaded mode
   # config.threadsafe!
 
@@ -46,4 +46,16 @@ Bichig::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  app_config = File.read(Rails.root.to_s + "/config/app.yml")
+  APP_CONFIG = YAML.load(app_config)
+
+  ActionMailer::Base.smtp_settings = { 
+    :address => APP_CONFIG[:address],
+    :port => APP_CONFIG[:port],
+    :authentication => APP_CONFIG[:authentication],
+    :enable_starttls_auto => APP_CONFIG[:enable_starttls_auto],
+    :user_name => APP_CONFIG[:user_name],
+    :password => APP_CONFIG[:password]
+  }
 end
