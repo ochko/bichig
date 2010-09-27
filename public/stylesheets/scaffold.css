@@ -65,3 +65,13 @@ div.field, div.actions {
     border:1px solid #666;
     padding: 2px;
 }
+#content{
+    min-height: 500px;
+}
+#footer{
+    margin-top:3em;
+}
+
+#footer #message{
+    font-size:0.8em;
+}
