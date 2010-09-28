@@ -51,6 +51,7 @@ GEM
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
+    memcache-client (1.8.5)
     mime-types (1.16)
     mysql2 (0.2.4)
     net-scp (1.0.4)
@@ -95,6 +96,7 @@ DEPENDENCIES
   devise
   gravtastic
   haml
+  memcache-client
   mysql2
   polyglot
   rails (= 3.0.0)

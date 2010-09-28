@@ -44,6 +44,7 @@ class OtfLookupsController < ApplicationController
 
     respond_to do |format|
       if @otf_lookup.save
+        expire_fragment("lookup-#{@otf_lookup.id}")
         format.html { redirect_to(@otf_lookup, :notice => 'Otf lookup was successfully created.') }
         format.xml  { render :xml => @otf_lookup, :status => :created, :location => @otf_lookup }
       else
@@ -60,8 +61,9 @@ class OtfLookupsController < ApplicationController
 
     respond_to do |format|
       if @otf_lookup.update_attributes(params[:otf_lookup])
+        expire_fragment("lookup-#{@otf_lookup.id}")
         format.html { redirect_to(@otf_lookup, :notice => 'Otf lookup was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml  { head :ok }        
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @otf_lookup.errors, :status => :unprocessable_entity }
@@ -74,7 +76,7 @@ class OtfLookupsController < ApplicationController
   def destroy
     @otf_lookup = OtfLookup.find(params[:id])
     @otf_lookup.destroy
-
+    expire_fragment("lookup-#{@otf_lookup.id}")
     respond_to do |format|
       format.html { redirect_to(otf_lookups_url) }
       format.xml  { head :ok }

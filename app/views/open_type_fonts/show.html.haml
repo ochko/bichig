@@ -5,5 +5,5 @@
 
 #font-tabs
   %ul
-    %li= link_to "Features", open_type_font_otf_features_path(@open_type_font)
-    %li= link_to "Classes", open_type_font_otf_classes_path(@open_type_font)
+    %li= link_to content_tag(:span,"Features"), open_type_font_otf_features_path(@open_type_font)
+    %li= link_to content_tag(:span, "Classes"), open_type_font_otf_classes_path(@open_type_font)

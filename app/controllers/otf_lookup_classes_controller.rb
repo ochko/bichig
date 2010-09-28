@@ -3,7 +3,7 @@ class OtfLookupClassesController < ApplicationController
     @cell = OtfLookupClass.new(params[:otf_lookup_class])
     if params[:klass] =~ /^@/
       @klass = OtfClass.find_by_name(params[:klass])
-    else      
+    else
       glyphs = params[:klass].split.map { |name|
         @cell.otf_lookup.font.glyphs.find_by_name(name) }.compact
       unless glyphs.empty?
@@ -13,7 +13,7 @@ class OtfLookupClassesController < ApplicationController
     end
     @cell.otf_class = @klass
     @cell.save if @cell.otf_class
-
+    expire_fragment("lookup-#{@cell.otf_lookup.id}")
     respond_to do |format|
       format.html {  redirect_to edit_otf_lookup_otf_lookup_row_path(@cell.otf_lookup, @cell.otf_lookup_row) }
       format.js

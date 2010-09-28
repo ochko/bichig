@@ -14,8 +14,7 @@ class OtfClassesController < ApplicationController
       @otf_class = OtfClass.find_by_name(params[:id])
     else
       @otf_class = OtfClass.find(params[:id])
-    end
-    
+    end  
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,6 +37,7 @@ class OtfClassesController < ApplicationController
     @otf_class = @font.otf_classes.new(params[:otf_class])
 
     if @otf_class.save
+      expire_fragment('classes')
       redirect_to [@font, @otf_class], :notice => 'Otf class was successfully created.'
     else
       render :action => "new" 
@@ -49,6 +49,7 @@ class OtfClassesController < ApplicationController
     @otf_class = OtfClass.find(params[:id])
 
     if @otf_class.update_attributes(params[:otf_class])
+      expire_fragment('classes')
       redirect_to( [@font,@otf_class], :notice => 'Otf class was successfully updated.') 
     else
       render :action => "edit" 
@@ -58,7 +59,7 @@ class OtfClassesController < ApplicationController
   def destroy
     @otf_class = OtfClass.find(params[:id])
     @otf_class.destroy
-
+    expire_fragment('classes')
     redirect_to @otf_class.open_type_font 
   end
 end

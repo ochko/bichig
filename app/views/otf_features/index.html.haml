@@ -3,30 +3,32 @@
 #feature-list
   - @font.features.each do |feature|
     - unless feature.lookups.empty?
-      %h2= feature.title || feature.name
+      %h2 
+        = feature.title || feature.name
+        %span.action= link_to t('edit'), edit_open_type_font_otf_feature_path(@font, feature)
       .feature-lookups
         - feature.lookups.each do |lookup|
-          %h3= link_to lookup.name, lookup
-          .lookup-table
-            %table
-              - lookup.otf_lookup_rows.each do |row|
-                %tr.row{:id => "row#{row.id}"}
-                  %td= link_to 'See', otf_lookup_otf_lookup_row_path(lookup, row)
-                  - row.lookup_classes.each do |klass|
-                    %td{:class => klass.kind}
-                      - if klass.otf_class.name
-                        %table
-                          %tr
-                            %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :target => 'classes'
-                      - else
-                        %table
-                          - klass.otf_class.otf_glyphs.each do |glyph|
+          - cache "lookup-#{lookup.id}" do
+            %h3= link_to lookup.name, lookup
+            .lookup-table
+              %table
+                - lookup.otf_lookup_rows.each do |row|
+                  %tr.row{:id => "row#{row.id}"}
+                    %td= link_to 'See', otf_lookup_otf_lookup_row_path(lookup, row)
+                    - row.lookup_classes.each do |klass|
+                      %td{:class => klass.kind}
+                        - if klass.otf_class.name
+                          %table
                             %tr
-                              %td= image_tag("/system/glyphs/#{glyph.name}.png")
-                              %td= glyph.name
-                  %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(lookup, row)
-                  %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(lookup, row), :method => :delete, :remote => true
-                  %td.user{:title => 'Засварласан'}= row.user
+                              %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :target => 'classes'
+                        - else
+                          %table
+                            - klass.otf_class.otf_glyphs.each do |glyph|
+                              %tr
+                                %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                                %td= glyph.name
+                    %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(lookup, row)
+                    %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(lookup, row), :method => :delete, :remote => true
+                    %td.user{:title => 'Засварласан'}= row.user
 
-        .actions
-          = link_to t('edit'), edit_open_type_font_otf_feature_path(@font, feature)
+        
