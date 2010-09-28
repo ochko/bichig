@@ -1,4 +1,4 @@
-= form_for(@otf_class) do |f|
+= form_for [@font, @otf_class] do |f|
   - if @otf_class.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@otf_class.errors.count, 'error')} prohibited this user from being saved:"
@@ -10,6 +10,25 @@
     = f.label :name
     %br
     = f.text_field :name
+
+  .field
+    = f.label :title
+    %br
+    = f.text_field :title
+
+  .field
+    = f.label :glyphs_text, 'Glyphs'
+    %br
+    %table
+      %tr
+        %td.top
+          %table
+            - @otf_class.otf_glyphs.each do |glyph|
+              %tr
+                %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                %td= glyph.name
+        %td.top
+          = f.text_area :glyphs_text
 
   .actions
     = f.submit

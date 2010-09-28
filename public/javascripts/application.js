@@ -1,0 +1,7 @@
+$(document).ready(function() {
+   $("#font-tabs").tabs({cache:true, spinner: 'Loading...',
+                        load:function(event, ui) { 
+                            $("#class-list").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
+                            $(".feature-lookups").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
+                        }});
+});

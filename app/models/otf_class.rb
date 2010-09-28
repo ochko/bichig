@@ -8,4 +8,17 @@ class OtfClass < ActiveRecord::Base
   def to_s
     "#{name}=[#{otf_glyphs.map{ |glyph| glyph.name}.join(' ')}];\n"
   end
+
+  def glyphs_text=(glyphs)
+    glyphs.split do |glyph|
+      unless self.otf_glyphs.find_by_name(glyph)
+        self.otf_glyphs << OtfGlyph.find_by_name(glyph)
+      end
+    end
+    self.otf_glyphs.compact!
+  end
+
+  def glyphs_text
+    self.otf_glyphs.map{ |glyph| glyph.name }.join("\n")
+  end
 end

@@ -3,7 +3,11 @@
   %head
     %title Bichig
     = stylesheet_link_tag :all
-    = javascript_include_tag :all
+    = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/ui-lightness/jquery-ui.css"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js"
+    = javascript_include_tag 'rails'
+    = javascript_include_tag 'application'
     = csrf_meta_tag
   %body
     #account
@@ -19,6 +23,7 @@
     #menu
       %ul
         %li= link_to "Home", root_path
+
     .notice= notice
     .alert= alert
     #content= yield

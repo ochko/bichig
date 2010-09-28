@@ -7,18 +7,16 @@ Bichig::Application.routes.draw do
     resources :otf_lookup_rows
   end
 
-  resources :otf_features
-
   resources :open_type_fonts do
     member do 
       get 'compile'
     end
     resources :otf_files
+    resources :otf_classes
+    resources :otf_features
   end
 
   resources :otf_unicodes
-
-  resources :otf_classes
 
   resources :otf_glyphs
 

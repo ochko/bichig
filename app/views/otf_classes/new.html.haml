@@ -1,3 +1,4 @@
-%h1= t '.title'
-%p= link_to t('back'), otf_classes_path
+%h1 Adding New Class
+%p= link_to t('back'), open_type_font_path(@font, :anchor => 'ui-tabs-2')
+
 = render 'form'

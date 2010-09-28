@@ -1,16 +1,15 @@
-%h1= t('.title')
-%p= link_to t('.new_otf_class'), new_otf_class_path
+.action= link_to "Create new class", new_open_type_font_otf_class_path(@font)
 
-%table
-  %thead
-    %tr
-      %th= OtfClass.human_attribute_name :name
-      %th{:colspan => 3}= t 'actions'
-  
-  %tbody
-    - for otf_class in @otf_classes
-      %tr{ :class => cycle(:odd, :even) }
-        %td= otf_class.name
-        %td.action= link_to t('show'), otf_class
-        %td.action= link_to t('edit'), edit_otf_class_path(otf_class)
-        %td.action= link_to t('destroy'), otf_class, :confirm => t('are_you_sure'), :method => :delete
+#class-list
+  - for otf_class in @otf_classes
+    %h3= link_to "%s : %s" % [otf_class.name, otf_class.title], '#'
+    .class-glyphs
+      %table
+        - otf_class.otf_glyphs.each do |glyph|
+          %tr
+            %td= image_tag("/system/glyphs/#{glyph.name}.png")
+            %td= glyph.name
+      .actions
+        = link_to t('edit'), edit_open_type_font_otf_class_path(@font, otf_class)
+        = link_to t('destroy'), open_type_font_otf_class_path(@font, otf_class), :confirm => t('are_you_sure'), :method => :delete
+

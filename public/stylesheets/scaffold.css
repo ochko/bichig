@@ -14,7 +14,6 @@ pre {
 
 a { color: #000; }
 a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
 
 div.field, div.actions {
   margin-bottom: 10px;
@@ -74,4 +73,10 @@ div.field, div.actions {
 
 #footer #message{
     font-size:0.8em;
+}
+.class-glyphs .actions, .feature-lookups .actions, .action{
+    text-align:right;
+}
+td.top{
+    vertical-align: top;
 }

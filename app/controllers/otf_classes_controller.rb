@@ -2,12 +2,9 @@ class OtfClassesController < ApplicationController
   # GET /otf_classes
   # GET /otf_classes.xml
   def index
-    @otf_classes = OtfClass.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @otf_classes }
-    end
+    @font = OpenTypeFont.find(params[:open_type_font_id])
+    @otf_classes = @font.classes.named(:include => :otf_glyphs)
+    render :layout => false
   end
 
   # GET /otf_classes/1
@@ -26,63 +23,42 @@ class OtfClassesController < ApplicationController
     end
   end
 
-  # GET /otf_classes/new
-  # GET /otf_classes/new.xml
   def new
+    @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_class = OtfClass.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @otf_class }
-    end
   end
 
-  # GET /otf_classes/1/edit
   def edit
+    @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_class = OtfClass.find(params[:id])
   end
 
-  # POST /otf_classes
-  # POST /otf_classes.xml
   def create
-    @otf_class = OtfClass.new(params[:otf_class])
+    @font = OpenTypeFont.find(params[:open_type_font_id])
+    @otf_class = @font.otf_classes.new(params[:otf_class])
 
-    respond_to do |format|
-      if @otf_class.save
-        format.html { redirect_to(@otf_class, :notice => 'Otf class was successfully created.') }
-        format.xml  { render :xml => @otf_class, :status => :created, :location => @otf_class }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @otf_class.errors, :status => :unprocessable_entity }
-      end
+    if @otf_class.save
+      redirect_to [@font, @otf_class], :notice => 'Otf class was successfully created.'
+    else
+      render :action => "new" 
     end
   end
 
-  # PUT /otf_classes/1
-  # PUT /otf_classes/1.xml
   def update
+    @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_class = OtfClass.find(params[:id])
 
-    respond_to do |format|
-      if @otf_class.update_attributes(params[:otf_class])
-        format.html { redirect_to(@otf_class, :notice => 'Otf class was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @otf_class.errors, :status => :unprocessable_entity }
-      end
+    if @otf_class.update_attributes(params[:otf_class])
+      redirect_to( [@font,@otf_class], :notice => 'Otf class was successfully updated.') 
+    else
+      render :action => "edit" 
     end
   end
 
-  # DELETE /otf_classes/1
-  # DELETE /otf_classes/1.xml
   def destroy
     @otf_class = OtfClass.find(params[:id])
     @otf_class.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(otf_classes_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to @otf_class.open_type_font 
   end
 end

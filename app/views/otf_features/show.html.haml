@@ -1,10 +1,32 @@
-%h1= t '.title'
+%h1= @otf_feature.title || @otf_feature.name
 %p
-  = link_to t('back'), otf_features_path
-  = link_to t('edit'), edit_otf_feature_path(@otf_feature)
+  = link_to t('back'), @font
+  = link_to t('edit'), edit_open_type_font_otf_feature_path(@font, @otf_feature)
 
 %dl
-  %dt= OtfFeature.human_attribute_name :name
-  %dd= @otf_feature.name
   %dt= OtfFeature.human_attribute_name :script
   %dd= @otf_feature.script
+
+.feature-lookups
+  - @otf_feature.lookups.each do |lookup|
+    %h3= link_to lookup.name, lookup
+    .lookup-table
+      %table
+        - lookup.otf_lookup_rows.each do |row|
+          %tr.row{:id => "row#{row.id}"}
+            %td= link_to 'See', otf_lookup_otf_lookup_row_path(lookup, row)
+            - row.lookup_classes.each do |klass|
+              %td{:class => klass.kind}
+                - if klass.otf_class.name
+                  %table
+                    %tr
+                      %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :target => 'classes'
+                - else
+                  %table
+                    - klass.otf_class.otf_glyphs.each do |glyph|
+                      %tr
+                        %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                        %td= glyph.name
+            %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(lookup, row)
+            %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(lookup, row), :method => :delete, :remote => true
+            %td.user{:title => 'Засварласан'}= row.user

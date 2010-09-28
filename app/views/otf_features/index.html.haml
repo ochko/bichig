@@ -1,18 +1,32 @@
-%h1= t('.title')
-%p= link_to t('.new_otf_feature'), new_otf_feature_path
+.action= link_to "New feature", new_open_type_font_otf_feature_path(@font)
 
-%table
-  %thead
-    %tr
-      %th= OtfFeature.human_attribute_name :name
-      %th= OtfFeature.human_attribute_name :script
-      %th{:colspan => 3}= t 'actions'
-  
-  %tbody
-    - for otf_feature in @otf_features
-      %tr{ :class => cycle(:odd, :even) }
-        %td= otf_feature.name
-        %td= otf_feature.script
-        %td.action= link_to t('show'), otf_feature
-        %td.action= link_to t('edit'), edit_otf_feature_path(otf_feature)
-        %td.action= link_to t('destroy'), otf_feature, :confirm => t('are_you_sure'), :method => :delete
+#feature-list
+  - @font.features.each do |feature|
+    - unless feature.lookups.empty?
+      %h2= feature.title || feature.name
+      .feature-lookups
+        - feature.lookups.each do |lookup|
+          %h3= link_to lookup.name, lookup
+          .lookup-table
+            %table
+              - lookup.otf_lookup_rows.each do |row|
+                %tr.row{:id => "row#{row.id}"}
+                  %td= link_to 'See', otf_lookup_otf_lookup_row_path(lookup, row)
+                  - row.lookup_classes.each do |klass|
+                    %td{:class => klass.kind}
+                      - if klass.otf_class.name
+                        %table
+                          %tr
+                            %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :target => 'classes'
+                      - else
+                        %table
+                          - klass.otf_class.otf_glyphs.each do |glyph|
+                            %tr
+                              %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                              %td= glyph.name
+                  %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(lookup, row)
+                  %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(lookup, row), :method => :delete, :remote => true
+                  %td.user{:title => 'Засварласан'}= row.user
+
+        .actions
+          = link_to t('edit'), edit_open_type_font_otf_feature_path(@font, feature)

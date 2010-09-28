@@ -1,6 +1,6 @@
 %h1= "Lookup: %s" % (@otf_lookup.name || @otf_lookup.feature.name)
 %p
-  = link_to t('back'), otf_lookups_path
+  = link_to t('back'), @otf_lookup.font
   = link_to t('edit'), edit_otf_lookup_path(@otf_lookup)
 
 %dl
@@ -22,7 +22,7 @@
           - if klass.otf_class.name
             %table
               %tr
-                %td= link_to klass.otf_class.name, otf_class_path(klass.otf_class.name), :target => 'classes'
+                %td= link_to klass.otf_class.name, open_type_font_otf_class_path(@otf_lookup.font, klass.otf_class.name), :target => 'classes'
           - else
             %table
               - klass.otf_class.otf_glyphs.each do |glyph|

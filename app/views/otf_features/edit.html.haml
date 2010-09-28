@@ -1,5 +1,5 @@
-%h1= t '.title'
+%h1 Edit Feature
 %p
-  = link_to t('back'), otf_features_path
-  = link_to t('show'), @otf_feature
+  = link_to 'Back to font', @font
+  = link_to 'Show', open_type_font_otf_feature_path(@font, @otf_feature)
 = render 'form'

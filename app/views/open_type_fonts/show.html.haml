@@ -3,8 +3,7 @@
   = link_to t('compile'), compile_open_type_font_path(@open_type_font)
   = link_to t('edit'), edit_open_type_font_path(@open_type_font)
 
-- @open_type_font.features.each do |feature|
-  - unless feature.lookups.empty?
-    %h3= feature.title || feature.name 
-    - feature.lookups.each do |lookup|
-      = link_to lookup.name, lookup
+#font-tabs
+  %ul
+    %li= link_to "Features", open_type_font_otf_features_path(@open_type_font)
+    %li= link_to "Classes", open_type_font_otf_classes_path(@open_type_font)
