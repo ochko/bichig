@@ -17,7 +17,7 @@ class OtfFeature < ActiveRecord::Base
       output << "\tlookupflag #{lookups.first.flag};\n" if lookups.first.flag
       output << lookups.first.otf_lookup_rows.join
       output << Language.all.map{|lang| "\tlanguage #{lang.code};\n"; }.join
-    else
+    elsif lookups.size > 1
       output << lookups.find_all_by_language_id(0).join
       Language.all.each do |lang|
         output << "\tlanguage #{lang.code} exclude_dflt;\n";
