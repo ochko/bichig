@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100927194429) do
+ActiveRecord::Schema.define(:version => 20100929001516) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100927194429) do
     t.string  "name"
     t.integer "open_type_font_id"
     t.string  "title"
+    t.text    "description"
   end
 
   add_index "otf_classes", ["name"], :name => "index_otf_classes_on_name", :unique => true
@@ -99,6 +100,7 @@ ActiveRecord::Schema.define(:version => 20100927194429) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.text     "description"
   end
 
   add_index "otf_lookups", ["name"], :name => "index_otf_lookups_on_name", :unique => true

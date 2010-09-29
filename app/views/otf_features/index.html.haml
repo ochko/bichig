@@ -9,8 +9,9 @@
       .feature-lookups
         - feature.lookups.each do |lookup|
           - cache "lookup-#{lookup.id}" do
-            %h3= link_to lookup.name, lookup
+            %h3= link_to "#{lookup.name} : #{lookup.description}", lookup
             .lookup-table
+              .edit= link_to t('edit'), edit_otf_lookup_path(lookup)
               %table
                 - lookup.otf_lookup_rows.each do |row|
                   %tr.row{:id => "row#{row.id}"}

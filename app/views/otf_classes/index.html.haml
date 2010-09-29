@@ -5,12 +5,13 @@
     - for otf_class in @otf_classes
       %h3= link_to "%s : %s" % [otf_class.name, otf_class.title], '#'
       .class-glyphs
+        = otf_class.description
+        .actions
+          = link_to t('edit'), edit_open_type_font_otf_class_path(@font, otf_class)
+          = link_to t('destroy'), open_type_font_otf_class_path(@font, otf_class), :confirm => t('are_you_sure'), :method => :delete
         %table
           - otf_class.otf_glyphs.each do |glyph|
             %tr
               %td= image_tag("/system/glyphs/#{glyph.name}.png")
               %td= glyph.name
-        .actions
-          = link_to t('edit'), edit_open_type_font_otf_class_path(@font, otf_class)
-          = link_to t('destroy'), open_type_font_otf_class_path(@font, otf_class), :confirm => t('are_you_sure'), :method => :delete
 

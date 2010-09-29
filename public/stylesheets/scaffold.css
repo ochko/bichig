@@ -111,6 +111,10 @@ ul#menu li a.current{
 .class-glyphs .actions, .feature-lookups .actions, .action{
     text-align:right;
 }
+.edit {
+    text-align:right;
+    float-right;
+}
 td.top{
     vertical-align: top;
 }
