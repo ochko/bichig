@@ -51,11 +51,11 @@ class OpenTypeFont < ActiveRecord::Base
         name = file_content[:name]
         
         if /^@/.match(name) # otf class definition
-          klass = self.classes.create(:name => name)
-          file_content[:glyphs].each do |glyphname|
-            glyph = self.glyphs.find_or_create_by_name(glyphname)
-            klass.otf_glyphs << glyph
-          end
+#          klass = self.classes.create(:name => name)
+#          file_content[:glyphs].each do |glyphname|
+#            glyph = self.glyphs.find_or_create_by_name(glyphname)
+#            klass.otf_glyphs << glyph
+#          end
         else # otf feature definition
           feature = self.features.find_or_create_by_name(name)
           
@@ -65,7 +65,7 @@ class OpenTypeFont < ActiveRecord::Base
           
           file_content[:feature_body][0].each do |body|
             if body[:script]
-              feature.script = body[:script]
+              feature.update_attribute(:script, body[:script])
             end
             if body[:inner_feature]
               child = self.features.find_or_create_by_name(body[:inner_feature])
@@ -74,24 +74,24 @@ class OpenTypeFont < ActiveRecord::Base
             
             if body[:lookup_flag]
               if dummy_lookup.nil?
-                dummy_lookup = feature.lookups.new(:name => feature.name)
+                dummy_lookup = feature.lookups.create(:name => feature.name)
               end
-              dummy_lookup.flag = body[:lookup_flag]
+              dummy_lookup.update_attribute(:flag, body[:lookup_flag])
             end
             
             if body[:subtable]
               if dummy_lookup.nil?
-                dummy_lookup = feature.lookups.new(:name => feature.name)
+                dummy_lookup = feature.lookups.create(:name => feature.name)
               end
               OtfLookupRow.build(dummy_lookup, body[:subtable])
             end
             
             if body[:lookup]
-              lookup = feature.lookups.new(:name => body[:lookup])
-              lookup.languge = language if language
+              lookup = feature.lookups.create(:name => body[:lookup],
+                                              :language => language)
               
               body[:lookup_body][0].each do |element|
-                lookup.flag = element[:lookup_flag] if element[:lookup_flag]
+                lookup.update_attribute(:flag, element[:lookup_flag])
                 if element[:subtable]
                   OtfLookupRow.build(lookup, element[:subtable])
                 end
@@ -99,9 +99,19 @@ class OpenTypeFont < ActiveRecord::Base
             end
             
             if body[:language]
-              language = Language.find_by_name(body[:language])
+              language = body[:language]
+              if !body[:exclude_default]
+                feature.lookups.each do |lookup|
+                  lookup.update_attribute(:language, language)
+                end
+              end
             end
             
+            if body[:empty_lookup] && language
+              lookup = feature.lookups.find_by_name(body[:empty_lookup])
+              lookup.update_attribute(:language, language) if lookup
+            end
+
           end
         end
       end

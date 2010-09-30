@@ -7,8 +7,6 @@ class OtfClassesController < ApplicationController
     render :layout => false
   end
 
-  # GET /otf_classes/1
-  # GET /otf_classes/1.xml
   def show
     if params[:id] =~ /^@/
       @otf_class = OtfClass.find_by_name(params[:id])
@@ -17,8 +15,8 @@ class OtfClassesController < ApplicationController
     end  
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @otf_class }
+      format.html 
+      format.js  
     end
   end
 

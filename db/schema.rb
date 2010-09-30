@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100929001516) do
+ActiveRecord::Schema.define(:version => 20100929224211) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -92,15 +92,18 @@ ActiveRecord::Schema.define(:version => 20100929001516) do
   end
 
   create_table "otf_lookups", :force => true do |t|
-    t.integer  "font_id",                    :null => false
-    t.integer  "feature_id",                 :null => false
-    t.integer  "language_id", :default => 0, :null => false
+    t.integer  "font_id",                        :null => false
+    t.integer  "feature_id",                     :null => false
     t.string   "name"
     t.string   "flag"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
     t.text     "description"
+    t.boolean  "mch",         :default => false
+    t.boolean  "mng",         :default => false
+    t.boolean  "sib",         :default => false
+    t.boolean  "tod",         :default => false
   end
 
   add_index "otf_lookups", ["name"], :name => "index_otf_lookups_on_name", :unique => true

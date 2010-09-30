@@ -22,6 +22,8 @@ class OtfLookupClass < ActiveRecord::Base
       'sub'
     elsif by?
       'by'
+    else
+      'reserve'
     end
   end
 
