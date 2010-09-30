@@ -32,7 +32,7 @@ class OtfClassesController < ApplicationController
 
   def create
     @font = OpenTypeFont.find(params[:open_type_font_id])
-    @otf_class = @font.otf_classes.new(params[:otf_class])
+    @otf_class = @font.classes.build(params[:otf_class])
 
     if @otf_class.save
       expire_fragment('classes')

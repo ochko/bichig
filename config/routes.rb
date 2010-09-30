@@ -14,11 +14,10 @@ Bichig::Application.routes.draw do
     resources :otf_files
     resources :otf_classes
     resources :otf_features
+    resources :otf_glyphs
   end
 
   resources :otf_unicodes
-
-  resources :otf_glyphs
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

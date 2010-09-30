@@ -1,6 +1,11 @@
 class OtfGlyph < ActiveRecord::Base
+  has_attached_file :image
   belongs_to :open_type_font
   has_and_belongs_to_many :otf_classes
+  
+  def path
+    "/images/glyphs/#{self.name}.png"
+  end
 
   def base?
     return !name.match(/^[^.]+$/).nil?

@@ -1,5 +1,5 @@
 %table
   - @otf_class.otf_glyphs.each do |glyph|
     %tr
-      %td= image_tag("/system/glyphs/#{glyph.name}.png")
+      %td= image_tag glyph.path
       %td= glyph.name

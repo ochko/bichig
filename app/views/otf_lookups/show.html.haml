@@ -24,7 +24,7 @@
             %table
               - klass.otf_class.otf_glyphs.each do |glyph|
                 %tr
-                  %td= image_tag("/system/glyphs/#{glyph.name}.png")
+                  %td= image_tag(glyph.path)
                   %td= glyph.name
       %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(@otf_lookup, row)
       %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(@otf_lookup, row), :method => :delete, :remote => true
