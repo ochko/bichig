@@ -8,7 +8,7 @@
   %dt= OtfLookup.human_attribute_name :flag
   %dd= @otf_lookup.flag
   %dt= OtfLookup.human_attribute_name :language
-  %dd= @otf_lookup.language.code if @otf_lookup.language
+  %dd= Language.all.map {|lang| lang.name if @otf_lookup.language(lang.code)}.join(', ')
 
 %table
   - @otf_lookup.otf_lookup_rows.each do |row|

@@ -21,6 +21,13 @@ class OtfLookupClassesController < ApplicationController
   end
 
   def destroy
+    @cell = OtfLookupClass.find(params[:id])
+    @cell.destroy
+    expire_fragment("lookup-#{@cell.otf_lookup.id}")
+    respond_to do |format|
+      format.html {  redirect_to edit_otf_lookup_otf_lookup_row_path(@cell.otf_lookup, @cell.otf_lookup_row) }
+      format.js
+    end
   end
 
   def update

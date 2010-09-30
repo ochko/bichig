@@ -118,3 +118,16 @@ ul#menu li a.current{
 td.top{
     vertical-align: top;
 }
+.klasses > td{
+    vertical-align: top;
+}
+
+td.sub {
+    border: 1px dashed #963;
+}
+td.by {
+    border: 1px solid #333;
+}
+td.reserve {
+    border: 1px solid #999;
+}

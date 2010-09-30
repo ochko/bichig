@@ -1,0 +1,13 @@
+%td{:class => cell.kind, :id => cell.id}
+  = link_to 'Delete', cell, :method => :delete, :remote => true
+  - if cell.otf_class.name
+    %table
+      %tr
+        %td 
+          = link_to cell.otf_class.name, open_type_font_otf_class_path(cell.otf_lookup.font, cell.otf_class.name), :remote => true, :title => cell.otf_class.name
+  - else
+    %table
+      - cell.otf_class.otf_glyphs.each do |glyph|
+        %tr
+          %td= image_tag("/system/glyphs/#{glyph.name}.png")
+          %td= glyph.name

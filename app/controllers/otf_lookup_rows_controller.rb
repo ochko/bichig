@@ -14,7 +14,6 @@ class OtfLookupRowsController < ApplicationController
   def show
     @otf_lookup = OtfLookup.find(params[:otf_lookup_id])
     @row = @otf_lookup.otf_lookup_rows.find(params[:id])
-    @expand_classes = true
   end
 
   def destroy

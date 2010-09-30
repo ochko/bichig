@@ -11,7 +11,9 @@
           - cache "lookup-#{lookup.id}" do
             %h3= link_to "#{lookup.name} : #{lookup.description}", lookup
             .lookup-table
-              .edit= link_to t('edit'), edit_otf_lookup_path(lookup)
+              .edit
+                = link_to "Edit", edit_otf_lookup_path(lookup)
+                = link_to "Add rule", otf_lookup_path(lookup)
               %table
                 - lookup.otf_lookup_rows.each do |row|
                   %tr.row{:id => "row#{row.id}"}
@@ -21,7 +23,7 @@
                         - if klass.otf_class.name
                           %table
                             %tr
-                              %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :target => 'classes'
+                              %td= link_to klass.otf_class.name, open_type_font_otf_class_path(lookup.font, klass.otf_class.name), :remote => true, :title => klass.otf_class.name
                         - else
                           %table
                             - klass.otf_class.otf_glyphs.each do |glyph|
