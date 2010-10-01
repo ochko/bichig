@@ -3,6 +3,12 @@ class OtfGlyph < ActiveRecord::Base
   belongs_to :open_type_font
   has_and_belongs_to_many :otf_classes
   
+  def after_save
+    if self.image.path
+      FileUtils.cp self.image.path, Rails.root.join('public/images/glyphs/', self.name + '.png')
+    end
+  end
+  
   def orphan? 
     self.otf_classes.empty?
   end

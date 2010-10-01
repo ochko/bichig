@@ -44,8 +44,6 @@ class OtfGlyphsController < ApplicationController
     @otf_glyph = @font.glyphs.build(params[:otf_glyph])
 
     if @otf_glyph.save
-      FileUtils.cp @otf_glyph.image.path, 
-      Rails.root.join('public/images/glyphs/', @otf_glyph.name + '.png')
       redirect_to(@font, :notice => 'Otf glyph was successfully created.')
     else
       render :action => "new"
@@ -59,8 +57,6 @@ class OtfGlyphsController < ApplicationController
     @otf_glyph = OtfGlyph.find(params[:id])
 
     if @otf_glyph.update_attributes(params[:otf_glyph])
-      FileUtils.cp @otf_glyph.image.path, 
-      Rails.root.join('public/images/glyphs/', @otf_glyph.name + '.png')
       redirect_to(@font, :notice => 'Otf glyph was successfully updated.')
     else
       render :action => "edit" 
