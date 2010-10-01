@@ -1,6 +1,6 @@
 class OtfClass < ActiveRecord::Base
   belongs_to :open_type_font
-  has_and_belongs_to_many :otf_glyphs
+  has_and_belongs_to_many :otf_glyphs, :order => 'name'
   
   scope :named, :conditions => "name is not null"
   scope :anonymous, :conditions => "name is null"
