@@ -140,6 +140,10 @@ tr.even {
     background-color: #ddd;
 }
 
+tr.added {
+    background-color: #af9;
+}
+
 .unicodes .glyph { text-align: center; vertical-align: center;}
 .unicodes .name  { text-align: center; width:200px;}
 .unicodes .hex   { text-align: center; width:100px;}

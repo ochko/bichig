@@ -1,0 +1,4 @@
+%tr{ :class => "added", :id => "unicode-#{listitem.id}" }
+  %td.glyph= image_tag listitem.path
+  %td.editable= render :partial => 'unicode', :object => listitem 
+        

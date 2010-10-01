@@ -1,4 +1,3 @@
-%p= link_to 'Add New Unicode', new_open_type_font_otf_unicode_path(@font)
 
 %table.unicodes
   %thead
@@ -13,8 +12,12 @@
             %th{:colspan => 3}
   
   %tbody
+    %tr#unicode-adder
+      %td Add:
+      %td.editable= render :partial => 'edit'
     - for otf_unicode in @otf_unicodes
-      %tr{ :class => cycle(:odd, :even), :id => "unicode-#{otf_unicode.id}" }
-        %td.glyph= image_tag otf_unicode.path
-        %td.editable= render :partial => 'unicode', :object => otf_unicode 
+      - unless otf_unicode.new_record?
+        %tr{ :class => cycle(:odd, :even), :id => "unicode-#{otf_unicode.id}" }
+          %td.glyph= image_tag otf_unicode.path
+          %td.editable= render :partial => 'unicode', :object => otf_unicode 
           

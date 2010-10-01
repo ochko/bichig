@@ -1,9 +1,9 @@
 require 'otf_feature_file'
 class OpenTypeFont < ActiveRecord::Base
 
-  has_many :glyphs  , :class_name => OtfGlyph.name  
-  has_many :unicodes, :class_name => OtfUnicode.name
-  has_many :classes , :class_name => OtfClass.name
+  has_many :glyphs  , :class_name => OtfGlyph.name, :order => 'name'
+  has_many :unicodes, :class_name => OtfUnicode.name, :order => 'name'
+  has_many :classes , :class_name => OtfClass.name, :order => 'name'
   has_many :features, :class_name => OtfFeature.name
   has_many :lookups,  :through => :features
   has_many :files,    :class_name => OtfFile.name, :foreign_key => 'font_id'
