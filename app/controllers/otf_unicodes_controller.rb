@@ -2,11 +2,12 @@ class OtfUnicodesController < ApplicationController
   # GET /otf_unicodes
   # GET /otf_unicodes.xml
   def index
+    @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_unicodes = OtfUnicode.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @otf_unicodes }
+      format.html
+      format.js  { render :layout => false }
     end
   end
 
