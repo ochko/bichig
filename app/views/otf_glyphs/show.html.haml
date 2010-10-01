@@ -1,10 +1,17 @@
-%h1= t '.title'
+%h1
+  = image_tag @otf_glyph.path
+  = @otf_glyph.name
 %p
-  = link_to t('back'), otf_glyphs_path
-  = link_to t('edit'), edit_otf_glyph_path(@otf_glyph)
+  = link_to t('back'), @font
+  = link_to t('edit'), edit_open_type_font_otf_glyph_path(@font, @otf_glyph)
 
-%dl
-  %dt= OtfGlyph.human_attribute_name :name
-  %dd= @otf_glyph.name
-  %dt= OtfGlyph.human_attribute_name :image
-  %dd= @otf_glyph.image
+%h3 Used Lookups
+
+%ul
+  - @otf_glyph.otf_classes.map{|c| c.otf_lookups}.flatten.uniq.each do |lookup|
+    %li= link_to lookup.name, lookup
+
+%h3 Used Classes
+%ul
+  - @otf_glyph.otf_classes.named.each do |klass|
+    %li= link_to klass.name, [@font, klass]

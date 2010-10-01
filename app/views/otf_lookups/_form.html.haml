@@ -9,7 +9,7 @@
   .field
     = f.label :feature_id
     %br
-    = f.text_field :feature_id
+    = f.select :feature_id, OtfFeature.all.map{|feature| [feature.name, feature.id]}
   .field
     = f.label :name
     %br

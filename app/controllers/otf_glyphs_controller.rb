@@ -72,8 +72,13 @@ class OtfGlyphsController < ApplicationController
   def destroy
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyph = OtfGlyph.find(params[:id])
-    @otf_glyph.destroy
+    if @otf_glyph.orphan?
+      @otf_glyph.destroy
+      redirect_to(@font) 
+    else
+      flash[:notice] = "Энэ глип ашиглагдаж байна"
+      redirect_to [@font, @otf_glyph]
+    end
 
-    redirect_to(@font) 
   end
 end

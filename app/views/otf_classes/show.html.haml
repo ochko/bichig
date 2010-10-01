@@ -4,7 +4,7 @@
   = link_to t('edit'), edit_open_type_font_otf_class_path(@otf_class.open_type_font, @otf_class)
 
 %table
-  - @otf_class.otf_glyphs.each do |glyph|
+  - @otf_class.otf_glyphs.order("name").each do |glyph|
     %tr
       %td= image_tag(glyph.path)
       %td= glyph.name

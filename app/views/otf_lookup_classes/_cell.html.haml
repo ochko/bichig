@@ -1,5 +1,5 @@
 %td{:class => cell.kind, :id => cell.id}
-  = link_to 'Delete', cell, :method => :delete, :remote => true
+  = link_to 'Delete', cell, :method => :delete, :remote => true, :confirm => "Устгах уу?"
   - if cell.otf_class.name
     %table
       %tr

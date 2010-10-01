@@ -21,37 +21,24 @@ class OtfLookupsController < ApplicationController
     end
   end
 
-  # GET /otf_lookups/new
-  # GET /otf_lookups/new.xml
   def new
-    @otf_lookup = OtfLookup.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @otf_lookup }
-    end
+    @otf_lookup = OtfLookup.new(:feature_id => params[:feature])
   end
 
-  # GET /otf_lookups/1/edit
   def edit
     @otf_lookup = OtfLookup.find(params[:id])
   end
 
-  # POST /otf_lookups
-  # POST /otf_lookups.xml
   def create
     @otf_lookup = OtfLookup.new(params[:otf_lookup])
 
-    respond_to do |format|
-      if @otf_lookup.save
-        expire_fragment("lookup-#{@otf_lookup.id}")
-        format.html { redirect_to(@otf_lookup, :notice => 'Otf lookup was successfully created.') }
-        format.xml  { render :xml => @otf_lookup, :status => :created, :location => @otf_lookup }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @otf_lookup.errors, :status => :unprocessable_entity }
-      end
+    if @otf_lookup.save
+      expire_fragment("lookup-#{@otf_lookup.id}")
+      redirect_to(@otf_lookup.feature.open_type_font, :notice => 'Otf lookup was successfully created.')
+    else
+      render :action => "new"
     end
+
   end
 
   # PUT /otf_lookups/1

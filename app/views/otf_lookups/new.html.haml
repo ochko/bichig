@@ -1,3 +1,8 @@
-%h1= t '.title'
-%p= link_to t('back'), otf_lookups_path
+%h1 Add New Lookup
+
+.breadcrumb
+  = link_to @otf_lookup.feature.open_type_font.name, @otf_lookup.feature.open_type_font
+  >
+  = @otf_lookup.feature.title || @otf_lookup.feature.name
+
 = render 'form'

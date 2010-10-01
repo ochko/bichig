@@ -11,7 +11,7 @@
   %dd= @otf_lookup.flag
 
 %table
-  %tr.klasses= render :partial => 'otf_lookup_classes/cell', :collection => @row.lookup_classes
+  %tr#klasses= render :partial => 'otf_lookup_classes/cell', :collection => @row.lookup_classes
 
 = form_for(@row.lookup_classes.build, :remote => true) do |f|
   = f.hidden_field :otf_lookup_row_id

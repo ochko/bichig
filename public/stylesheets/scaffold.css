@@ -115,10 +115,10 @@ ul#menu li a.current{
     text-align:right;
     float-right;
 }
-td.top{
+td.top, tr.row td{
     vertical-align: top;
 }
-.klasses > td{
+.klasses > td, #klasses > td{
     vertical-align: top;
 }
 
