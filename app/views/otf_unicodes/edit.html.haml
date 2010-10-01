@@ -1,5 +1,5 @@
 %h1= t '.title'
 %p
-  = link_to t('back'), otf_unicodes_path
-  = link_to t('show'), @otf_unicode
+  = link_to t('back'), @font
+  = link_to t('show'), [@font, @otf_unicode]
 = render 'form'

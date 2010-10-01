@@ -1,19 +1,20 @@
 %p= link_to 'Add New Unicode', new_open_type_font_otf_unicode_path(@font)
 
-%table
+%table.unicodes
   %thead
     %tr
       %th= OtfUnicode.human_attribute_name :glyph
-      %th= OtfUnicode.human_attribute_name :hex
-      %th= OtfUnicode.human_attribute_name :name
-      %th{:colspan => 3}
+      %th
+        %table
+          %tr
+            %th.hex= OtfUnicode.human_attribute_name :hex
+            %th.name= OtfUnicode.human_attribute_name :name
+            %th.description= OtfUnicode.human_attribute_name :description
+            %th{:colspan => 3}
   
   %tbody
     - for otf_unicode in @otf_unicodes
-      %tr{ :class => cycle(:odd, :even) }
-        %td= image_tag otf_unicode.path
-        %td= otf_unicode.hex
-        %td= otf_unicode.name
-        %td.action= link_to t('show'), [@font, otf_unicode]
-        %td.action= link_to t('edit'), ""
-        %td.action= link_to t('destroy'), [@font, otf_unicode], :confirm => t('are_you_sure'), :method => :delete
+      %tr{ :class => cycle(:odd, :even), :id => "unicode-#{otf_unicode.id}" }
+        %td.glyph= image_tag otf_unicode.path
+        %td.editable= render :partial => 'unicode', :object => otf_unicode 
+          

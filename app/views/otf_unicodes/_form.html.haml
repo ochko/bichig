@@ -1,4 +1,4 @@
-= form_for(@otf_unicode) do |f|
+= form_for [@font, @otf_unicode] do |f|
   - if @otf_unicode.errors.any?
     #errorExplanation
       %h2= "#{pluralize(@otf_unicode.errors.count, 'error')} prohibited this user from being saved:"
@@ -19,9 +19,9 @@
     %br
     = f.text_field :name
   .field
-    = f.label :image
+    = f.label :description
     %br
-    = f.text_field :image
+    = f.text_field :description
 
   .actions
-    = f.submit
+    = f.submit "Save"

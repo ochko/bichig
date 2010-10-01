@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100929224211) do
+ActiveRecord::Schema.define(:version => 20101001204759) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20100929224211) do
     t.string  "hex"
     t.integer "dec"
     t.string  "name"
+    t.string  "description"
   end
 
   create_table "users", :force => true do |t|

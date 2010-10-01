@@ -131,3 +131,19 @@ td.by {
 td.reserve {
     border: 1px solid #999;
 }
+
+tr.odd {
+    background-color: #eee;
+}
+
+tr.even {
+    background-color: #ddd;
+}
+
+.unicodes .glyph { text-align: center; vertical-align: center;}
+.unicodes .name  { text-align: center; width:200px;}
+.unicodes .hex   { text-align: center; width:100px;}
+.unicodes .desc   { text-align: center; width:300px;}
+.unicodes .name  input { width:180px;}
+.unicodes .hex   input { width:80px;}
+.unicodes .desc  input { width:280px;}

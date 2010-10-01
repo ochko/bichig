@@ -1,8 +1,9 @@
 %h1= t '.title'
 %p
-  = link_to t('back'), otf_unicodes_path
-  = link_to t('edit'), edit_otf_unicode_path(@otf_unicode)
+  = link_to t('back'), @font
+  = link_to t('edit'), edit_open_type_font_otf_unicode_path(@font, @otf_unicode)
 
+= image_tag @otf_unicode.path
 %dl
   %dt= OtfUnicode.human_attribute_name :hex
   %dd= @otf_unicode.hex
@@ -10,5 +11,5 @@
   %dd= @otf_unicode.dec
   %dt= OtfUnicode.human_attribute_name :name
   %dd= @otf_unicode.name
-  %dt= OtfUnicode.human_attribute_name :image
-  %dd= @otf_unicode.image
+  %dt= OtfUnicode.human_attribute_name :description
+  %dd= @otf_unicode.description
