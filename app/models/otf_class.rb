@@ -6,7 +6,7 @@ class OtfClass < ActiveRecord::Base
   scope :anonymous, :conditions => "name is null"
 
   has_many :otf_lookup_classes
-  has_many :otf_lookups, :through => :otf_lookup_classes
+  has_many :otf_lookups, :through => :otf_lookup_classes, :order => 'name'
   
   def to_s
     "#{name}=[#{otf_glyphs.map{ |glyph| glyph.name}.join(' ')}];\n"
