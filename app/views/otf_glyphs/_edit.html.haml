@@ -1,0 +1,7 @@
+= form_for [@font, @otf_glyph], :remote => true, :html => {:multipart => true } do |f|
+  %table
+    %tr
+      %td.name= f.text_field :name
+      %td.desc= f.text_field :description
+      %td.image= f.file_field :image
+      %td{:colspan => 3}= f.submit "Save"

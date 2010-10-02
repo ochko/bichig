@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101001204759) do
+ActiveRecord::Schema.define(:version => 20101002000707) do
 
   create_table "languages", :force => true do |t|
     t.string "code"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20101001204759) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "description"
   end
 
   add_index "otf_glyphs", ["name"], :name => "index_otf_glyphs_on_name", :unique => true

@@ -50,9 +50,7 @@ class OtfUnicodesController < ApplicationController
     respond_to do |format|
       if @otf_unicode.save
         format.html { redirect_to(@otf_unicode, :notice => 'Otf unicode was successfully created.') }
-        format.js do
-          @position = @font.unicodes.order('name').index(@otf_unicode)
-        end
+        format.js
       else
         format.html { render :action => "new" }
         format.js { render :text => "alert('Sorry. Can not save!');" }

@@ -1,0 +1,3 @@
+%tr{:id => "glyph-#{listitem.id}"}
+  %td.glyph= image_tag(listitem.path)
+  %td.editable= render :partial => "glyph", :object => listitem

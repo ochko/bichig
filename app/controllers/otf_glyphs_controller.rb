@@ -4,6 +4,7 @@ class OtfGlyphsController < ApplicationController
   def index
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyphs = @font.glyphs.order(:name)
+    @otf_glyph = @font.glyphs.build
     render :layout => false
   end
 
@@ -35,6 +36,10 @@ class OtfGlyphsController < ApplicationController
   def edit
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyph = OtfGlyph.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js  
+    end
   end
 
   # POST /otf_glyphs
@@ -42,11 +47,14 @@ class OtfGlyphsController < ApplicationController
   def create
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyph = @font.glyphs.build(params[:otf_glyph])
-
-    if @otf_glyph.save
-      redirect_to(@font, :notice => 'Otf glyph was successfully created.')
-    else
-      render :action => "new"
+    respond_to do |format|
+      if @otf_glyph.save
+        format.html { redirect_to(@font, :notice => 'Otf glyph was successfully created.') }
+        format.js
+      else
+        format.html { render :action => "new" }
+        format.js
+      end
     end
   end
 
@@ -55,11 +63,14 @@ class OtfGlyphsController < ApplicationController
   def update
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyph = OtfGlyph.find(params[:id])
-
-    if @otf_glyph.update_attributes(params[:otf_glyph])
-      redirect_to(@font, :notice => 'Otf glyph was successfully updated.')
-    else
-      render :action => "edit" 
+    respond_to do |format|
+      if @otf_glyph.update_attributes(params[:otf_glyph])
+        format.html { redirect_to(@font, :notice => 'Otf glyph was successfully updated.') }
+        format.js
+      else
+        format.html { render :action => "edit"  }
+        format.js
+      end
     end
   end
 
@@ -68,13 +79,18 @@ class OtfGlyphsController < ApplicationController
   def destroy
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_glyph = OtfGlyph.find(params[:id])
-    if @otf_glyph.orphan?
-      @otf_glyph.destroy
-      redirect_to(@font) 
-    else
-      flash[:notice] = "Энэ глип ашиглагдаж байна"
-      redirect_to [@font, @otf_glyph]
+    respond_to do |format|
+      if @otf_glyph.orphan?
+        @otf_glyph.destroy
+        format.html { redirect_to(@font) }
+        format.js 
+      else
+        format.html do
+          flash[:notice] = "Энэ глип ашиглагдаж байна"
+          redirect_to [@font, @otf_glyph]
+        end
+        format.js { render :text => "alert('Энэ глип ашиглагдаж байна')"}
+      end
     end
-
   end
 end

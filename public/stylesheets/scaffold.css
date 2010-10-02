@@ -151,3 +151,9 @@ tr.added {
 .unicodes .name  input { width:180px;}
 .unicodes .hex   input { width:80px;}
 .unicodes .desc  input { width:280px;}
+
+.glyphs .glyph { text-align: center; vertical-align: center;}
+.glyphs .name  { width:220px;}
+.glyphs .desc   { text-align: center; width:400px;}
+.glyphs .name  input { width:200px;}
+.glyphs .desc  input { width:380px;}
