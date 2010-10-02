@@ -19,6 +19,11 @@
             .edit
               = link_to t('edit'), edit_open_type_font_otf_feature_path(@open_type_font, feature)
               = link_to "Add New Lookup", new_otf_lookup_path(:feature => feature)
-            %ul
-              - feature.lookups.each do |lookup|
-                %li= link_to "#{lookup.name} : #{lookup.description}", lookup
+            %div.lookup-list{:id => "lookups-#{feature.id}" }
+              %ul
+                %li= link_to "Add Lookup", "#lookup-add-#{feature.id}"
+                - feature.lookups.each do |lookup|
+                  %li= link_to content_tag(:span, lookup.name), otf_lookup_path(lookup, :format => :js)
+              %div{:id => "lookup-add-#{feature.id}"}
+                %h4 Add Lookup
+                = render :partial => 'otf_lookups/lookup', :object => feature.lookups.build

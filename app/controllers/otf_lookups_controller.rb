@@ -17,7 +17,7 @@ class OtfLookupsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @otf_lookup }
+      format.js  { render :partial => 'show' }
     end
   end
 
@@ -26,17 +26,22 @@ class OtfLookupsController < ApplicationController
   end
 
   def edit
-    @otf_lookup = OtfLookup.find(params[:id])
+    @otf_lookup = OtfLookup.find(params[:id])    
   end
 
   def create
     @otf_lookup = OtfLookup.new(params[:otf_lookup])
-
-    if @otf_lookup.save
-      expire_fragment("lookup-#{@otf_lookup.id}")
-      redirect_to(@otf_lookup.feature.open_type_font, :notice => 'Otf lookup was successfully created.')
-    else
-      render :action => "new"
+    
+    respond_to do |format|
+      if @otf_lookup.save
+        expire_fragment("lookup-#{@otf_lookup.id}")
+        format.html { redirect_to(@otf_lookup.feature.open_type_font, :notice => 'Otf lookup was successfully created.') }
+        format.js do 
+          @index = @otf_lookup.feature.lookups.index(@otf_lookup) + 1
+        end
+      else
+        render :action => "new"
+      end
     end
 
   end
@@ -50,10 +55,10 @@ class OtfLookupsController < ApplicationController
       if @otf_lookup.update_attributes(params[:otf_lookup])
         expire_fragment("lookup-#{@otf_lookup.id}")
         format.html { redirect_to(@otf_lookup, :notice => 'Otf lookup was successfully updated.') }
-        format.xml  { head :ok }        
+        format.js
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @otf_lookup.errors, :status => :unprocessable_entity }
+        format.js
       end
     end
   end

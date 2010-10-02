@@ -1,0 +1,35 @@
+%div{:id => "lookup-#{@otf_lookup.id}"}
+  %div{:id => "lookupbody-#{@otf_lookup.id}"}
+    %h4
+      = @otf_lookup.name
+      = link_to t('edit'), edit_otf_lookup_path(@otf_lookup), :remote => true
+    .desc= @otf_lookup.description || "No description"
+      
+    .meta
+      %label Flag:
+      = @otf_lookup.flag || "None"
+      ,
+      %label Language:
+      = Language.all.map {|lang| lang.name if @otf_lookup.language(lang.code)}.compact.join(', ')
+  
+  %table
+    - @otf_lookup.otf_lookup_rows.each do |row|
+      %tr.row{:id => "row#{row.id}"}
+        %td= link_to 'See', otf_lookup_otf_lookup_row_path(@otf_lookup, row)
+        - row.lookup_classes.each do |klass|
+          %td{:class => klass.kind}
+            - if klass.otf_class.name
+              %table
+                %tr
+                  %td= link_to klass.otf_class.name, open_type_font_otf_class_path(@otf_lookup.font, klass.otf_class.name), :target => 'classes'
+            - else
+              %table
+                - klass.otf_class.otf_glyphs.each do |glyph|
+                  %tr
+                    %td= image_tag(glyph.path)
+                    %td= glyph.name
+        %td= link_to 'Edit', edit_otf_lookup_otf_lookup_row_path(@otf_lookup, row)
+        %td= link_to 'Delete', otf_lookup_otf_lookup_row_path(@otf_lookup, row), :method => :delete, :remote => true
+        %td.user{:title => 'Засварласан'}= row.user
+  
+  = link_to "Add New Row", new_otf_lookup_otf_lookup_row_path(@otf_lookup)

@@ -5,5 +5,8 @@ $(document).ready(function() {
                             $("#font-editor").dialog();
                         }});
    $(".feature-lookups").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
-   $(".feature-lookups a").attr('target', '_blank');
+
+
+   $(".lookup-list").tabs().addClass('ui-tabs-vertical ui-helper-clearfix');
+   $(".lookup-list li").removeClass('ui-corner-top').addClass('ui-corner-left');
 });

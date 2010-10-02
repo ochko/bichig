@@ -1,0 +1,1 @@
+$('#lookups-<%=@otf_lookup.feature.id%>').tabs('add', '<%= escape_javascript otf_lookup_path(@otf_lookup, :format => :js) %>', '<%= escape_javascript @otf_lookup.name %>', <%= @index %>).tabs('select', <%= @index %>);

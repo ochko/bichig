@@ -27,4 +27,5 @@ class OtfLookup < ActiveRecord::Base
   def language(code)
     self[code.downcase.to_sym]
   end
+
 end
