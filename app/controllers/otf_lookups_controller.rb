@@ -36,9 +36,7 @@ class OtfLookupsController < ApplicationController
       if @otf_lookup.save
         expire_fragment("lookup-#{@otf_lookup.id}")
         format.html { redirect_to(@otf_lookup.feature.open_type_font, :notice => 'Otf lookup was successfully created.') }
-        format.js do 
-          @index = @otf_lookup.feature.lookups.index(@otf_lookup) + 1
-        end
+        format.js { @index = @otf_lookup.index + 1 }
       else
         render :action => "new"
       end
@@ -67,11 +65,12 @@ class OtfLookupsController < ApplicationController
   # DELETE /otf_lookups/1.xml
   def destroy
     @otf_lookup = OtfLookup.find(params[:id])
+    @index = @otf_lookup.index + 1
     @otf_lookup.destroy
     expire_fragment("lookup-#{@otf_lookup.id}")
     respond_to do |format|
       format.html { redirect_to(otf_lookups_url) }
-      format.xml  { head :ok }
+      format.js
     end
   end
 end

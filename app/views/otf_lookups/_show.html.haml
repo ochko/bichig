@@ -3,6 +3,7 @@
     %h4
       = @otf_lookup.name
       = link_to t('edit'), edit_otf_lookup_path(@otf_lookup), :remote => true
+      = link_to t('destroy'), @otf_lookup, :method => :delete, :confirm => 'Are you sure?', :remote => true
     .desc= @otf_lookup.description || "No description"
       
     .meta

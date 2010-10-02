@@ -28,4 +28,7 @@ class OtfLookup < ActiveRecord::Base
     self[code.downcase.to_sym]
   end
 
+  def index
+    feature.lookups.index(self)
+  end
 end
