@@ -154,6 +154,6 @@ tr.added {
 
 .glyphs .glyph { text-align: center; vertical-align: center;}
 .glyphs .name  { width:220px;}
-.glyphs .desc   { text-align: center; width:400px;}
+.glyphs .desc  { width:400px;}
 .glyphs .name  input { width:200px;}
 .glyphs .desc  input { width:380px;}
