@@ -1,0 +1,1 @@
+$('#rendered-<%= @rendered.id %>').replaceWith('<%= escape_javascript(render :partial => 'rendered_examples/rendered', :object => @rendered) %>');

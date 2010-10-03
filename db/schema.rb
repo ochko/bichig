@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101003152051) do
+ActiveRecord::Schema.define(:version => 20101003162621) do
 
   create_table "classes_glyphs", :force => true do |t|
     t.integer "otf_class_id"
@@ -75,12 +75,14 @@ ActiveRecord::Schema.define(:version => 20101003152051) do
   end
 
   create_table "otf_files", :force => true do |t|
-    t.integer  "font_id",         :null => false
-    t.string   "version",         :null => false
+    t.integer  "font_id",                        :null => false
+    t.string   "version",                        :null => false
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "compile_message"
+    t.integer  "correct_count",   :default => 0
+    t.integer  "incorrect_count", :default => 0
   end
 
   add_index "otf_files", ["version"], :name => "index_otf_files_on_version", :unique => true
@@ -137,6 +139,14 @@ ActiveRecord::Schema.define(:version => 20101003152051) do
     t.integer "dec"
     t.string  "name"
     t.string  "description"
+  end
+
+  create_table "rendered_examples", :force => true do |t|
+    t.integer  "example_id"
+    t.integer  "file_id"
+    t.boolean  "correct",    :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

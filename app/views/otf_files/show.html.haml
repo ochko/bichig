@@ -1,18 +1,19 @@
-%h1= @file.font.name
+%h2
+  = @file.version
+  (
+  %span.correct{:title => "Correct examples count"}= @file.correct_count
+  \/
+  %span.wrong{:title => "Wrong examples count"}= @file.incorrect_count
+  )
+.download  
+  - if @file.has_source?
+    = link_to "Source", source_url(@file)
+  - if @file.has_binary?
+    = link_to "Binary", binary_url(@file)
+    .message= @file.compile_message
 
-%dl
-  %dt= OtfFile.human_attribute_name :version
-  %dd= @file.version 
-  
-- if @file.has_source?
-  %dl
-    %dt= OtfFile.human_attribute_name :source
-    %dd= link_to "Source", source_url(@file)
+%table.rendered-examples
+  = render :partial => 'rendered_examples/rendered', :collection => @file.rendered_examples
 
-- if @file.has_binary?
-  %dl
-    %dt= OtfFile.human_attribute_name :binary
-    %dd= link_to "Binary", binary_url(@file)
-  %dl
-    %dt Compile message
-    %dd= @file.compile_message
+= form_for [@font, @file], :remote => true do |f|
+  = f.submit 'Render Examples'

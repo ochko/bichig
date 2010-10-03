@@ -1,0 +1,6 @@
+%tr{:id => "rendered-#{rendered.id}"}
+  %td= link_to image_tag(rendered.correct ? 'pass.png' : 'failed.png'), rendered, :remote => true, :title => "Click to change Status"
+  %td= rendered.example.mongolian
+  %td= image_tag "/system/fonts/#{@file.version}/#{rendered.example_id}.png"
+  %td= rendered.example.cyrillic
+  %td= rendered.example.glyphs

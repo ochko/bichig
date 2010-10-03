@@ -6,7 +6,7 @@ class OpenTypeFont < ActiveRecord::Base
   has_many :classes , :class_name => OtfClass.name, :order => 'name'
   has_many :features, :class_name => OtfFeature.name
   has_many :lookups,  :through => :features
-  has_many :files,    :class_name => OtfFile.name, :foreign_key => 'font_id'
+  has_many :files,    :class_name => OtfFile.name, :foreign_key => 'font_id', :order => 'created_at DESC'
 
   has_attached_file :source
 

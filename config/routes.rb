@@ -1,4 +1,6 @@
 Bichig::Application.routes.draw do
+  resources :rendered_examples
+  
   resources :examples
 
   resources :comments

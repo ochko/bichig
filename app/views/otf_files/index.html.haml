@@ -1,2 +1,4 @@
-%h1 OtfFiles#index
-%p Find me in app/views/otf_files/index.html.haml
+.file-list
+  %ul
+    - @files.each do |file|
+      %li= link_to content_tag(:span, image_tag(file.passed? ? 'pass.png' : 'failed.png') + file.version), [@font, file]

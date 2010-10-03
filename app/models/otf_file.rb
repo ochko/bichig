@@ -6,8 +6,32 @@ class OtfFile < ActiveRecord::Base
   # Compile command should take 3 arguments below:
   # compile_cmd base_font feature_file_name output_file_name
   COMPILE_CMD = "#{SCRIPT_DIR}/#{FEATURE_APPLY}"
-  
+  RENDER_CMD = "pango-view --font='%s' --rotate=90 --gravity=north --dpi=150 -q -t '%s' -o %s.png"
+
   belongs_to :font, :class_name => OpenTypeFont.name
+  has_many :rendered_examples, :foreign_key => 'file_id'
+  has_many :examples, :through => :rendered_examples
+  
+  def passed?
+    correct_count > 0 && incorrect_count == 0
+  end
+
+  def render_examples!
+    imagesdir = "#{DIR}/#{self.version}"
+    FileUtils.mkdir(imagesdir) unless File.directory?(imagesdir)
+    Example.all.each do |example|
+      cmd = RENDER_CMD % [self.font_name, example.mongolian, 
+                          "#{imagesdir}/#{example.id}"]
+      if system(cmd) 
+        self.rendered_examples.find_or_create_by_example_id(example.id)
+      end
+    end
+    count_correctness!
+  end
+
+  def count_correctness!
+    self.update_attributes(:correct_count => self.rendered_examples.correct.count, :incorrect_count => self.rendered_examples.incorrect.count)
+  end
 
   def source_name
     "#{self.version}.fea"
