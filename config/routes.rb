@@ -1,4 +1,6 @@
 Bichig::Application.routes.draw do
+  resources :comments
+
   devise_for :users
 
   resources :otf_lookup_classes

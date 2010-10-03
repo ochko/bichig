@@ -1,0 +1,2 @@
+$('#<%=@comment.commentable_type%>-<%=@comment.commentable_id %>-comments').append('<%= escape_javascript(render :partial => "comments/comment", :object => @comment) %>');
+$('.comment-text').val('');

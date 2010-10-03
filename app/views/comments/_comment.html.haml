@@ -1,0 +1,6 @@
+%tr{:id => "comment-#{comment.id}"}
+  %td= comment.user.name
+  %td= comment.created_at
+%tr
+  %td= image_tag raw( comment.user.gravatar_url(:size => 60) )
+  %td= simple_format comment.comment

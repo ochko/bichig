@@ -1,4 +1,5 @@
 class OtfLookup < ActiveRecord::Base
+  acts_as_commentable
   belongs_to :feature, :class_name => OtfFeature.name
   belongs_to :font, :class_name => OpenTypeFont.name
   has_many :otf_lookup_rows, :dependent => :destroy, :foreign_key => 'lookup_id', :include => :lookup_classes

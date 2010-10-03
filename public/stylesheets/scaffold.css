@@ -172,3 +172,10 @@ div.meta {
     font-size: 0.9em;
     color: #999;
 }
+
+.comment-text{
+    width: 600px;
+    height: 60px;
+    padding: .5em;
+    display: block;
+}
