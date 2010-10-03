@@ -51,11 +51,11 @@ class OpenTypeFont < ActiveRecord::Base
         name = file_content[:name]
         
         if /^@/.match(name) # otf class definition
-#          klass = self.classes.create(:name => name)
-#          file_content[:glyphs].each do |glyphname|
-#            glyph = self.glyphs.find_or_create_by_name(glyphname)
-#            klass.otf_glyphs << glyph
-#          end
+          klass = self.classes.create(:name => name)
+          file_content[:glyphs].each do |glyphname|
+            glyph = self.glyphs.find_or_create_by_name(glyphname)
+            klass.otf_glyphs << glyph
+          end
         else # otf feature definition
           feature = self.features.find_or_create_by_name(name)
           
