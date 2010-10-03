@@ -1,4 +1,6 @@
 class OtfFilesController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
+
   def show
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @file = OtfFile.find(params[:id])

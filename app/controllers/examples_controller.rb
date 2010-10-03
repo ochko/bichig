@@ -1,4 +1,5 @@
 class ExamplesController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
   def index
     @examples = Example.all
     @example = Example.new

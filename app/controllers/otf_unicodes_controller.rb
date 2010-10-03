@@ -1,4 +1,5 @@
 class OtfUnicodesController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
 
   def index
     @font = OpenTypeFont.find(params[:open_type_font_id])

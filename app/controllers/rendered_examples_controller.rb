@@ -1,4 +1,5 @@
 class RenderedExamplesController < ApplicationController
+  before_filter :require_editor
   def show
     @rendered = RenderedExample.find(params[:id])
     @file = @rendered.file

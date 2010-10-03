@@ -17,4 +17,7 @@ class User < ActiveRecord::Base
     self.name
   end
 
+  def editor?
+    self.editor
+  end
 end

@@ -3,4 +3,14 @@ class ApplicationController < ActionController::Base
   
   before_filter :authenticate_user!
 
+  def require_editor
+    unless current_user && current_user.editor?
+      flash[:notice] = "Зөвхөн засварлах зөвшөөрөлтэй хүн л өөрчлөнө"
+      redirect_to root_url
+    end
+  end
+
+  def editor?
+    current_user && current_user.editor
+  end
 end

@@ -1,4 +1,6 @@
 class OtfLookupRowsController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
+
   def new
     @otf_lookup = OtfLookup.find(params[:otf_lookup_id])
     @row = @otf_lookup.otf_lookup_rows.create(:user => current_user)

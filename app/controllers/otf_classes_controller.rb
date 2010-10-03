@@ -1,4 +1,5 @@
 class OtfClassesController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
   # GET /otf_classes
   # GET /otf_classes.xml
   def index

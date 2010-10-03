@@ -1,4 +1,5 @@
 class OpenTypeFontsController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
   # GET /open_type_fonts
   # GET /open_type_fonts.xml
   def index

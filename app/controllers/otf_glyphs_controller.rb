@@ -1,4 +1,6 @@
 class OtfGlyphsController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
+
   # GET /otf_glyphs
   # GET /otf_glyphs.xml
   def index

@@ -1,4 +1,6 @@
 class OtfLookupClassesController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
+
   def create
     @cell = OtfLookupClass.new(params[:otf_lookup_class])
     if params[:klass] =~ /^@/

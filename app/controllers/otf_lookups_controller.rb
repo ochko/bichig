@@ -1,4 +1,6 @@
 class OtfLookupsController < ApplicationController
+  before_filter :require_editor, :except => [:index, :show]
+
   # GET /otf_lookups
   # GET /otf_lookups.xml
   def index
