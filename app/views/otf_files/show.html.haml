@@ -13,3 +13,6 @@
   %dl
     %dt= OtfFile.human_attribute_name :binary
     %dd= link_to "Binary", binary_url(@file)
+  %dl
+    %dt Compile message
+    %dd= @file.compile_message
