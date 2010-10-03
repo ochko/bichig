@@ -9,3 +9,4 @@ backup
 public/system
 public/images/glyphs
 lib/mongolian-script/*
+script/*ttf
