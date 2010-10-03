@@ -6,7 +6,7 @@ class OtfFile < ActiveRecord::Base
   # Compile command should take 3 arguments below:
   # compile_cmd base_font feature_file_name output_file_name
   COMPILE_CMD = "#{SCRIPT_DIR}/#{FEATURE_APPLY}"
-  RENDER_CMD = "pango-view --font='%s' --rotate=90 --gravity=north --dpi=150 -q -t '%s' -o %s.png"
+  RENDER_CMD = "/usr/bin/pango-view --font='%s' --rotate=90 --gravity=north --dpi=150 -q -t '%s' -o %s.png"
 
   belongs_to :font, :class_name => OpenTypeFont.name
   has_many :rendered_examples, :foreign_key => 'file_id'
@@ -22,9 +22,8 @@ class OtfFile < ActiveRecord::Base
     Example.all.each do |example|
       cmd = RENDER_CMD % [self.font_name, example.mongolian, 
                           "#{imagesdir}/#{example.id}"]
-      if system(cmd) 
-        self.rendered_examples.find_or_create_by_example_id(example.id)
-      end
+      result = `#{cmd} 2>&1`
+      self.rendered_examples.find_or_create_by_example_id(example.id)
     end
     count_correctness!
   end
