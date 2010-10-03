@@ -75,11 +75,7 @@ class OpenTypeFontsController < ApplicationController
     else
       @file = @font.compile!
     end
-    if @file
-      redirect_to open_type_font_otf_file_path(@font, @file)
-    else
-      flash[:error] = "Error occured!"
-      redirect_to @font
-    end
+    flash[:error] = "Error occured!" unless @file
+    redirect_to @font
   end
 end

@@ -2,7 +2,7 @@ class OtfFile < ActiveRecord::Base
   DIR = Rails.root.join('public','system','fonts')
   SCRIPT_DIR = Rails.root.join('script')
   FEATURE_APPLY = 'changefeature.py'
-  BASE_FONT = "#{Rails.root.join('backup')}/template.ttf"
+  BASE_FONT = "#{Rails.root.join('public','system','template')}/template.ttf"
   # Compile command should take 3 arguments below:
   # compile_cmd base_font feature_file_name output_file_name
   COMPILE_CMD = "#{SCRIPT_DIR}/#{FEATURE_APPLY}"
