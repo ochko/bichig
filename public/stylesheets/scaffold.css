@@ -179,3 +179,21 @@ div.meta {
     padding: .5em;
     display: block;
 }
+table.class-glyphs{
+    width: 200px;
+    float:left;
+}
+.class-comments{
+    width: 600px;
+    float:left;
+}
+
+td.avatar, td.comment{
+    vertical-align:top;
+    padding: .3em 1em 0 0;
+    border-bottom: 1px dotted #999;
+}
+td.comment > p:first-child{
+    padding-top: 0;
+    margin-top: 0;
+}

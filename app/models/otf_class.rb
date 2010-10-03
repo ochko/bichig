@@ -1,4 +1,5 @@
 class OtfClass < ActiveRecord::Base
+  acts_as_commentable
   belongs_to :open_type_font
   has_and_belongs_to_many :otf_glyphs, :order => 'name'
   

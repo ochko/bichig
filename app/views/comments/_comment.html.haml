@@ -2,5 +2,5 @@
   %td= comment.user.name
   %td= comment.created_at
 %tr
-  %td= image_tag raw( comment.user.gravatar_url(:size => 60) )
-  %td= simple_format comment.comment
+  %td.avatar= image_tag raw( comment.user.gravatar_url(:size => 60) )
+  %td.comment= simple_format comment.comment

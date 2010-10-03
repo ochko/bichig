@@ -1,17 +1,19 @@
 .action= link_to "Create new class", new_open_type_font_otf_class_path(@font)
 
-- cache 'classes' do
-  #class-list
-    - for otf_class in @otf_classes
-      %h3= link_to "%s : %s" % [otf_class.name, otf_class.title], '#'
-      .class-glyphs
-        = otf_class.description
-        .actions
-          = link_to t('edit'), edit_open_type_font_otf_class_path(@font, otf_class)
-          = link_to t('destroy'), open_type_font_otf_class_path(@font, otf_class), :confirm => t('are_you_sure'), :method => :delete
-        %table
-          - otf_class.otf_glyphs.order('name').each do |glyph|
-            %tr
-              %td= image_tag(glyph.path)
-              %td= glyph.name
+#class-list
+  - for otf_class in @otf_classes
+    %h3= link_to "%s : %s" % [otf_class.name, otf_class.title], '#'
+    .class-glyphs
+      = otf_class.description
+      .actions
+        = link_to t('edit'), edit_open_type_font_otf_class_path(@font, otf_class)
+        = link_to t('destroy'), open_type_font_otf_class_path(@font, otf_class), :confirm => t('are_you_sure'), :method => :delete
+      %table.class-glyphs
+        - otf_class.otf_glyphs.order('name').each do |glyph|
+          %tr
+            %td= image_tag(glyph.path)
+            %td= glyph.name
+      .class-comments
+        %h2 Comments
+        = render :partial => 'comments/commentable', :object => otf_class
 

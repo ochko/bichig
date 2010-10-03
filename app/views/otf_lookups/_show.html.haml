@@ -34,15 +34,6 @@
         %td.user{:title => 'Засварласан'}= row.user
   
   = link_to "Add New Row", new_otf_lookup_otf_lookup_row_path(@otf_lookup)
-  %h2 Comments
-  %table{:id => "OtfLookup-#{@otf_lookup.id}-comments"}
-    = render :partial => 'comments/comment', :collection => @otf_lookup.comments
 
-  - if user_signed_in?
-    - form_for(@otf_lookup.comments.build, :remote => true) do |f|
-      = f.hidden_field :commentable_type
-      = f.hidden_field :commentable_id
-      = f.text_area :comment, :class => "comment-text"
-      = f.submit 'Send'
-  - else
-    .info= raw t('login to comment') %[link_to(t('login'), new_user_session_path), link_to(t('sign up'), new_user_registration_path)]
+  %h2 Comments
+  = render :partial => 'comments/commentable', :object =>  @otf_lookup
