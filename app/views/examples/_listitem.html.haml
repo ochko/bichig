@@ -1,0 +1,3 @@
+%tr{ :class => "added", :id => "example-#{listitem.id}" }
+  %td= listitem.id
+  %td.editable= render :partial => 'example', :object => listitem 

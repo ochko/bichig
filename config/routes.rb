@@ -1,4 +1,6 @@
 Bichig::Application.routes.draw do
+  resources :examples
+
   resources :comments
 
   devise_for :users

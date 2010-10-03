@@ -201,3 +201,10 @@ td.comment > p:first-child{
     padding-top: 0;
     margin-top: 0;
 }
+
+.examples .mongolian {  vertical-align: center; width:100px;}
+.examples .cyrillic  {  vertical-align: center; width:100px;}
+.examples .glyphseq  {  width:300px;}
+.examples .mongolian  input { width:80px;}
+.examples .cyrillic   input { width:80px;}
+.examples .glyphseq   input { width:280px;}

@@ -1,0 +1,8 @@
+%h1= t '.title'
+%p
+  = link_to t('back'), examples_path
+  = link_to t('edit'), edit_example_path(@example)
+
+%dl
+  %dt= Example.human_attribute_name :word
+  %dd= @example.word

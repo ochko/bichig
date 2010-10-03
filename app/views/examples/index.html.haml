@@ -1,0 +1,22 @@
+
+%table.examples
+  %thead
+    %tr
+      %th
+      %th 
+        %table
+          %tr
+            %th.mongolian Mongolian
+            %th.cyrillic Cyrillic
+            %th.glyphseq Glyphs
+            %th{:colspan => 3}
+  
+  %tbody
+    %tr#example-adder
+      %td Add:
+      %td.editable= render :partial => 'edit'
+      - for example in @examples
+        - unless example.new_record?
+          %tr{:id => "example-#{example.id}" }
+            %td= example.id
+            %td.editable= render :partial => 'example', :object => example
