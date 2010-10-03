@@ -1,7 +1,8 @@
 class OtfGlyph < ActiveRecord::Base
   has_attached_file :image
   belongs_to :open_type_font
-  has_and_belongs_to_many :otf_classes
+  has_many :class_glyphs
+  has_many :otf_classes, :through => :class_glyphs
   
   def after_save
     if self.image.path

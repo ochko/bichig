@@ -43,9 +43,10 @@ class OtfLookupClass < ActiveRecord::Base
     output    
   end
 
-  def self.build(row, group_body)
+  def self.build(row, group_body, position = 0)
     lookup_class = self.new(:otf_lookup_row => row,
-                            :otf_lookup => row.lookup)
+                            :otf_lookup => row.lookup,
+                            :position => position)
     if group_body[:replaceable_glyphs]
       lookup_class.replace_flag = FLAGS[:sub]
       group_elements = group_body[:replaceable_glyphs][0]
@@ -54,20 +55,26 @@ class OtfLookupClass < ActiveRecord::Base
       group_elements = group_body[:glyphs][0]
     end
     
-    klass = row.lookup.font.classes.build(:name => nil) # Anonymous OtfClass
-    group_elements.each do |name|
-      if /^@/.match(name)
-        klass = OtfClass.find_by_name(name)
-        lookup_class.otf_class = klass
-        break # Hope there is only one OtfClass
-      else
+    
+    if group_elements.instance_of?(String) && /^@/.match(group_elements)
+      klass = OtfClass.find_by_name(group_elements)
+      lookup_class.otf_class = klass
+    else
+      # Anonymous OtfClass
+      klass = row.lookup.font.classes.create(:name => nil)
+      position = 0
+      group_elements.each do |name|
+        position += 1024
         glyph = row.lookup.font.glyphs.find_or_create_by_name(name)
-        klass.otf_glyphs << glyph
+        ClassGlyph.create(:otf_class => klass, 
+                          :otf_glyph => glyph,
+                          :position => position)
       end
+      lookup_class.otf_class = klass
     end
-    lookup_class.otf_class = klass
+    debugger unless lookup_class.otf_class
+    lookup_class.save
     lookup_class
   end
-
 
 end

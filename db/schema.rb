@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101002231550) do
+ActiveRecord::Schema.define(:version => 20101003142616) do
+
+  create_table "classes_glyphs", :force => true do |t|
+    t.integer "otf_class_id"
+    t.integer "otf_glyph_id"
+    t.integer "position",     :default => 0
+  end
+
+  add_index "classes_glyphs", ["otf_class_id"], :name => "index_classes_glyphs_on_otf_class_id"
+  add_index "classes_glyphs", ["otf_glyph_id"], :name => "index_classes_glyphs_on_otf_glyph_id"
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -49,14 +58,6 @@ ActiveRecord::Schema.define(:version => 20101002231550) do
 
   add_index "otf_classes", ["name"], :name => "index_otf_classes_on_name", :unique => true
 
-  create_table "otf_classes_otf_glyphs", :id => false, :force => true do |t|
-    t.integer "otf_class_id"
-    t.integer "otf_glyph_id"
-  end
-
-  add_index "otf_classes_otf_glyphs", ["otf_class_id"], :name => "index_otf_classes_otf_glyphs_on_otf_class_id"
-  add_index "otf_classes_otf_glyphs", ["otf_glyph_id"], :name => "index_otf_classes_otf_glyphs_on_otf_glyph_id"
-
   create_table "otf_features", :force => true do |t|
     t.integer  "open_type_font_id"
     t.integer  "parent_id"
@@ -68,11 +69,12 @@ ActiveRecord::Schema.define(:version => 20101002231550) do
   end
 
   create_table "otf_files", :force => true do |t|
-    t.integer  "font_id",    :null => false
-    t.string   "version",    :null => false
+    t.integer  "font_id",         :null => false
+    t.string   "version",         :null => false
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "compile_message"
   end
 
   add_index "otf_files", ["version"], :name => "index_otf_files_on_version", :unique => true

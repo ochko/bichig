@@ -1,14 +1,15 @@
 class CreateClassGlyphJoiner < ActiveRecord::Migration
   def self.up
-    create_table :otf_classes_otf_glyphs, :id => false do |t|
+    create_table :classes_glyphs do |t|
       t.integer :otf_class_id
       t.integer :otf_glyph_id
+      t.integer :position, :default => 0
     end
-    add_index :otf_classes_otf_glyphs, :otf_class_id
-    add_index :otf_classes_otf_glyphs, :otf_glyph_id
+    add_index :classes_glyphs, :otf_class_id
+    add_index :classes_glyphs, :otf_glyph_id
   end
 
   def self.down
-    drop_table :otf_classes_otf_glyphs
+    drop_table :classes_glyphs
   end
 end

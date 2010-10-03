@@ -89,7 +89,7 @@ class OpenTypeFont < ActiveRecord::Base
             if body[:lookup]
               lookup = feature.lookups.create(:name => body[:lookup],
                                               :language => language)
-              
+
               body[:lookup_body][0].each do |element|
                 lookup.update_attribute(:flag, element[:lookup_flag])
                 if element[:subtable]

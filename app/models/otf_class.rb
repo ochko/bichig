@@ -1,7 +1,8 @@
 class OtfClass < ActiveRecord::Base
   acts_as_commentable
   belongs_to :open_type_font
-  has_and_belongs_to_many :otf_glyphs, :order => 'name'
+  has_many :class_glyphs, :order => 'position'
+  has_many :otf_glyphs, :through => :class_glyphs 
   
   scope :named, :conditions => "name is not null"
   scope :anonymous, :conditions => "name is null"
