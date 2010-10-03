@@ -4,6 +4,12 @@
 %p
   = link_to t('edit'), edit_open_type_font_otf_class_path(@otf_class.open_type_font, @otf_class)
 
+%h3 Used Lookups
+
+%ul
+  - @otf_class.otf_lookups.uniq.each do |lookup|
+    %li= link_to lookup.name, lookup
+
 %table
   - @otf_class.otf_glyphs.order("name").each do |glyph|
     %tr

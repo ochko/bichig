@@ -187,6 +187,10 @@ table.class-glyphs{
     width: 600px;
     float:left;
 }
+.class-lookups{
+    width: 600px;
+    float:left;
+}
 
 td.avatar, td.comment{
     vertical-align:top;

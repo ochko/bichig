@@ -13,6 +13,12 @@
           %tr
             %td= image_tag(glyph.path)
             %td= glyph.name
+      .class-lookups
+        %h2 Used Lookups
+        %ul
+          - otf_class.otf_lookups.uniq.each do |lookup|
+            %li= link_to lookup.name, lookup
+
       .class-comments
         %h2 Comments
         = render :partial => 'comments/commentable', :object => otf_class
