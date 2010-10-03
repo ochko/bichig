@@ -15,7 +15,7 @@ Bichig::Application.routes.draw do
 
   resources :open_type_fonts do
     member do 
-      get 'compile'
+      put 'compile'
     end
     resources :otf_files
     resources :otf_classes

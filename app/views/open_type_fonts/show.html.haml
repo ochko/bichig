@@ -1,7 +1,9 @@
-%h1= @open_type_font.name
-%p
-  = link_to t('compile'), compile_open_type_font_path(@open_type_font)
-  = link_to t('edit'), edit_open_type_font_path(@open_type_font)
+%h1
+  = @open_type_font.name
+  - if editor?
+    = form_tag(compile_open_type_font_path(@open_type_font), :method => :put, :remote => true) do
+      = submit_tag t('compile'), :disable_with => "Compiling..."
+    = button_to t('edit'), edit_open_type_font_path(@open_type_font), :method => :get
 
 #font-tabs
   %ul

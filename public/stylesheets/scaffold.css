@@ -223,3 +223,15 @@ td.comment > p:first-child{
 .wrong {
     color: red;
 }
+
+h1 div, h1 form {
+    display:inline;
+}
+
+span.download a{
+    color: #999;
+    font-size: 0.8em;
+    margin: 0 .5em;
+    padding-left: 18px;
+    background: url(/images/down.png) no-repeat 0 50%;
+}

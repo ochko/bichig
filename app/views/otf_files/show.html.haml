@@ -5,12 +5,12 @@
   \/
   %span.wrong{:title => "Wrong examples count"}= @file.incorrect_count
   )
-.download  
-  - if @file.has_source?
-    = link_to "Source", source_url(@file)
-  - if @file.has_binary?
-    = link_to "Binary", binary_url(@file)
-    .message= @file.compile_message
+  %span.download  
+    - if @file.has_source?
+      = link_to "Source", source_url(@file)
+    - if @file.has_binary?
+      = link_to "Binary", binary_url(@file)
+      / .message= @file.compile_message
 
 %table.rendered-examples
   = render :partial => 'rendered_examples/rendered', :collection => @file.rendered_examples

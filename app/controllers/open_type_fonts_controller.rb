@@ -75,7 +75,9 @@ class OpenTypeFontsController < ApplicationController
     else
       @file = @font.compile!
     end
-    flash[:error] = "Error occured!" unless @file
-    redirect_to @font
+    respond_to do |format|
+      format.html { redirect_to @font }
+      format.js
+    end
   end
 end
