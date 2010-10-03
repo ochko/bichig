@@ -16,4 +16,4 @@
   = render :partial => 'rendered_examples/rendered', :collection => @file.rendered_examples
 
 = form_for [@font, @file], :remote => true do |f|
-  = f.submit 'Render Examples'
+  = f.submit 'Render Examples', :disable_with => "Wait. It will take time..."
