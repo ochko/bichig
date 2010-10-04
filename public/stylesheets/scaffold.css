@@ -235,3 +235,13 @@ span.download a{
     padding-left: 18px;
     background: url(/images/down.png) no-repeat 0 50%;
 }
+
+.pass {
+    padding-left: 20px;
+    background: url(/images/pass.png) no-repeat 0 50%;
+}
+
+.fail {
+    padding-left: 20px;
+    background: url(/images/fail.png) no-repeat 0 50%;
+}

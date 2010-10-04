@@ -2,7 +2,7 @@ class OtfFile < ActiveRecord::Base
   DIR = Rails.root.join('public','system','fonts')
   SCRIPT_DIR = Rails.root.join('script')
   FEATURE_APPLY = 'changefeature.py'
-  BASE_FONT = "#{Rails.root.join('public','system','template')}/template.ttf"
+  BASE_FONT = "#{Rails.root.join('public','system','template')}/empty.ttf"
   COMPILE_CMD = "#{SCRIPT_DIR}/#{FEATURE_APPLY}"
   RENDER_CMD = "/usr/bin/pango-view --font='%s' --rotate=90 --gravity=north --dpi=150 -q -o %s.png %s"
 
@@ -32,7 +32,6 @@ class OtfFile < ActiveRecord::Base
   def count_correctness!
     self.update_attributes(:correct_count => self.rendered_examples.correct.count, :incorrect_count => self.rendered_examples.incorrect.count)
   end
-
   def source_name
     "#{self.version}.fea"
   end
