@@ -208,7 +208,7 @@ td.comment > p:first-child{
     padding-top: 0;
     margin-top: 0;
 }
-.mongolian { font-size: 2em;}
+.mongolian { font-size: 2em; text-align:left;}
 .examples .mongolian {  vertical-align: center; width:220px; }
 .examples .cyrillic  {  vertical-align: center; width:100px;}
 .examples .glyphseq  {  width:300px;}
@@ -244,4 +244,14 @@ span.download a{
 .fail {
     padding-left: 20px;
     background: url(/images/fail.png) no-repeat 0 50%;
+}
+
+.stack img{
+    border: 0;
+    padding: 0;
+    margin:0;
+    display:block;
+}
+td.view {
+    text-align:center;
 }
