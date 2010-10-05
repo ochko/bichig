@@ -79,8 +79,8 @@ class OtfFile < ActiveRecord::Base
     if File.exist?(self.source)
       self.compile_message = `#{COMPILE_CMD} #{BASE_FONT} #{self.source} #{self.binary} #{self.font_name} 2>&1`
       self.save
-      if File.exist?(self.binary) 
-        `fc-cache #{DIR}`
+      if File.exist?(self.binary)
+        `cp #{self.binary} ~/.fonts/ && fc-cache`
       end
     end
   end
