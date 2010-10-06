@@ -1,6 +1,6 @@
 %table
   %tr
-    %td.name= link_to glyph.name, [@font, glyph], :target => '_blank'
+    %td.name= link_to glyph.name, [@font, glyph], :remote => true, :class => 'glyph'
     %td.desc= glyph.description
     %td= link_to t('edit'), edit_open_type_font_otf_glyph_path(@font, glyph), :remote => true
     %td= link_to t('destroy'), [@font, glyph], :confirm => t('are_you_sure'), :method => :delete, :remote => true

@@ -1,6 +1,9 @@
 %h1
   = image_tag @otf_glyph.path
   = @otf_glyph.name
+
+= @otf_glyph.description
+
 %p
   = link_to t('back'), @font
   = link_to t('edit'), edit_open_type_font_otf_glyph_path(@font, @otf_glyph)

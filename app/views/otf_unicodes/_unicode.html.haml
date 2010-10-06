@@ -1,8 +1,7 @@
 %table
   %tr
     %td.hex= unicode.hex
-    %td.name= unicode.name
+    %td.name= link_to unicode.name, [@font, unicode], :remote => true, :class => "unicode"
     %td.desc= unicode.description
-    %td.action= link_to t('show'), [@font, unicode]
     %td.action= link_to t('edit'), edit_open_type_font_otf_unicode_path(@font, unicode), :remote => true
     %td.action= link_to t('destroy'), [@font, unicode], :confirm => t('are_you_sure'), :method => :delete, :remote => true

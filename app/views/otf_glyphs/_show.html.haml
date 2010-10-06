@@ -1,0 +1,11 @@
+%h2
+  = image_tag @otf_glyph.path
+  = @otf_glyph.name
+
+= @otf_glyph.description
+
+%h4 Used Lookups
+= raw @otf_glyph.otf_classes.map{|c| c.otf_lookups}.flatten.uniq.map { |lookup| link_to(lookup.name, lookup, :target => '_blank', :class => 'lookup') }.join(' ')
+
+%h4 Used Classes
+= raw @otf_glyph.otf_classes.named.map { |klass| link_to(klass.name, [@font, klass], :target => '_blank', :class => 'klass')}.join(' ')

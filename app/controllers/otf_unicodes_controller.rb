@@ -13,10 +13,11 @@ class OtfUnicodesController < ApplicationController
   def show
     @font = OpenTypeFont.find(params[:open_type_font_id])
     @otf_unicode = OtfUnicode.find(params[:id])
-
+    @glyphs = OtfGlyph.find(:all, :conditions => ["name like ?", 
+                                                 '%'+@otf_unicode.hex+'%'])
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @otf_unicode }
+      format.js
     end
   end
 

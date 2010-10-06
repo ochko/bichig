@@ -1,15 +1,15 @@
-%h1= t '.title'
+%h2
+  = @otf_unicode.name
+  (
+  = @otf_unicode.hex
+  )
+= image_tag @otf_unicode.path
+%br
+= @otf_unicode.description
 %p
   = link_to t('back'), @font
   = link_to t('edit'), edit_open_type_font_otf_unicode_path(@font, @otf_unicode)
-
-= image_tag @otf_unicode.path
-%dl
-  %dt= OtfUnicode.human_attribute_name :hex
-  %dd= @otf_unicode.hex
-  %dt= OtfUnicode.human_attribute_name :dec
-  %dd= @otf_unicode.dec
-  %dt= OtfUnicode.human_attribute_name :name
-  %dd= @otf_unicode.name
-  %dt= OtfUnicode.human_attribute_name :description
-  %dd= @otf_unicode.description
+%h4 Glyphs
+= raw @glyphs.map {|glyph| link_to glyph.name, [@font, glyph]}.join(' ')
+%h4 Lookups
+= raw @glyphs.map {|glyph| glyph.otf_classes.map{|c| c.otf_lookups} }.flatten.uniq.sort{|a, b| a.name <=> b.name }.map {|lookup| link_to lookup.name, lookup }.join(' ')

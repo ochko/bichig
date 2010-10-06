@@ -1,0 +1,13 @@
+%h2
+  = @otf_unicode.name
+  (
+  = @otf_unicode.hex
+  )
+= image_tag @otf_unicode.path
+%br
+= @otf_unicode.description
+
+%h4 Glyphs
+= raw @glyphs.map {|glyph| link_to glyph.name, [@font, glyph], :remote => true, :class => 'glyph'}.join(' ')
+%h4 Lookups
+= raw @glyphs.map {|glyph| glyph.otf_classes.map{|c| c.otf_lookups} }.flatten.uniq.sort{|a, b| a.name <=> b.name }.map {|lookup| link_to lookup.name, lookup, :class => 'lookup' }.join(' ')

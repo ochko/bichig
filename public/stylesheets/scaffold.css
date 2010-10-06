@@ -245,12 +245,13 @@ span.download a{
     padding-left: 20px;
     background: url(/images/fail.png) no-repeat 0 50%;
 }
-
+.rendered-examples .cyrillic {text-align: center;}
 .stack img{
     border: 0;
     padding: 0;
     margin:0;
     display:block;
+    padding-left: 30px;
 }
 td.view {
     text-align:center;
