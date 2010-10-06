@@ -1,16 +1,13 @@
 $(document).ready(function() {
    var $udialog = $('<div id="udialog" style="width:300px"></div>')
                       .html('<img src="/images/spinner.gif"/>')
-                      .dialog({
-                              autoOpen: false,
-                              title: 'Unicode'
-                              });
+                      .dialog({ autoOpen: false, title: 'Unicode', minWidth: 400 });
    var $gdialog = $('<div id="gdialog" style="width:300px"></div>')
                       .html('<img src="/images/spinner.gif"/>')
-                      .dialog({
-                              autoOpen: false,
-                              title: 'Glyph'
-                              });
+                      .dialog({ autoOpen: false, title: 'Glyph', minWidth: 400 });
+   var $kdialog = $('<div id="kdialog" style="width:300px"></div>')
+                      .html('<img src="/images/spinner.gif"/>')
+                      .dialog({ autoOpen: false, title: 'Class', minWidth: 400});
    $("#font-tabs").tabs({cache:true, spinner: 'Loading...',
                         load:function(event, ui) {
                             $("a.unicode").click(function() {
@@ -22,11 +19,14 @@ $(document).ready(function() {
                                return true;
                             });
                             $("a.klass").live('click', function() {
-                               $("#font-tabs").tabs('select', 1);       
-                               return false;
+                               $kdialog.html('<img src="/images/spinner.gif"/>').dialog('open');
+                               return true;
                             });
                             $("a.lookup").live('click', function() {
-                               $("#font-tabs").tabs('select', 0);       
+                          //     $("#udialog").dialog("close");
+                          //     $("#gdialog").dialog("close");
+                          //     $("#kdialog").dialog("close");
+                               $("#font-tabs").tabs('select', 0);
                                return false;
                             });
                             $("#class-list").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 

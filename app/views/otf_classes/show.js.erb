@@ -1,1 +1,2 @@
-$('a[title=<%=@otf_class.name%>]').html("<%=escape_javascript(render :partial => 'otf_classes/show') %>");
+$("#kdialog").html('<%= escape_javascript(render :partial => 'show')%>').dialog('open');
+

@@ -1,5 +1,14 @@
+%h2= @otf_class.name
+= @otf_class.description
+
+%h3 Used Lookups
+
+%ul
+  - @otf_class.otf_lookups.uniq.each do |lookup|
+    %li= link_to lookup.name, lookup, :class => 'lookup'
+
 %table
-  - @otf_class.otf_glyphs.each do |glyph|
+  - @otf_class.otf_glyphs.order("name").each do |glyph|
     %tr
-      %td= image_tag glyph.path
+      %td= image_tag(glyph.path)
       %td= glyph.name

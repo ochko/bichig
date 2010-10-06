@@ -22,7 +22,7 @@
             - if klass.otf_class.name
               %table
                 %tr
-                  %td= link_to klass.otf_class.name, open_type_font_otf_class_path(@otf_lookup.font, klass.otf_class.name), :target => 'classes'
+                  %td= link_to klass.otf_class.name, open_type_font_otf_class_path(@otf_lookup.font, klass.otf_class.name), :remote => true, :class => 'klass'
             - else
               %table
                 - klass.otf_class.otf_glyphs.each do |glyph|
