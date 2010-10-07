@@ -31,20 +31,15 @@ $(document).ready(function() {
                                return true;
                             });
                             $("a.lookup").live('click', function() {
-                          //     $("#udialog").dialog("close");
-                          //     $("#gdialog").dialog("close");
-                          //     $("#kdialog").dialog("close");
+                               $("#udialog").dialog("close");
+                               $("#gdialog").dialog("close");
+                               $("#kdialog").dialog("close");
                                $("#font-tabs").tabs('select', 0);
                                return false;
                             });
                             $("#class-list").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
                             $("#font-editor").dialog();
-                            $(".file-list").tabs({cache:true, load: function(even, ui){
-                                                      $("#rendered-accordion").accordion({   collapse: true,       
-                                                                                             header: "h3",
-                                                                                             active: false
-                                                                                         });
-                                                  } }).addClass('ui-tabs-vertical-wide ui-helper-clearfix');
+                            $(".file-list").tabs({cache:true, load: function(){ $('#rendered-accordion').accordion({ collapsible: true, header: "h3", active: false, autoHeight: false});  } }).addClass('ui-tabs-vertical-wide ui-helper-clearfix');
    $(".file-list li").removeClass('ui-corner-top').addClass('ui-corner-left');
                         }});
    $(".feature-lookups").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 

@@ -15,8 +15,18 @@
 
 #rendered-accordion
   - Category.all.each do |category|
-    %h3= link_to category.name, category_path(category, :file => @file.id), :remote => true
+    %h3= link_to category.name, category_path(category, :file => @file.id)
     %div{:id => "file-category-#{category.id}"}
+      %table.rendered-examples
+        %tr
+          %th{:width => "1%"}
+          %th Unicode<br/>text
+          %th Rendered<br/>Image
+          %th Correct<br/>Image
+          %th Cyrillic
+          = render :partial => 'rendered_examples/rendered', :collection => @file.rendered_examples.select { |re| re.example.category_id == category.id}
+
+      
 
 = form_for [@font, @file], :remote => true do |f|
   = f.submit 'Render Examples', :disable_with => "Wait. It will take time..."
