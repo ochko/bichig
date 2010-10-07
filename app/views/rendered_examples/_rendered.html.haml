@@ -4,3 +4,9 @@
   %td.view= image_tag "/system/fonts/#{@file.version}/#{rendered.example_id}.png"
   %td.stack= raw stack_glyphs(rendered.example.glyphs)
   %td.cyrillic= rendered.example.cyrillic
+%tr
+  %td
+  %td{:colspan => 4}
+    %div{:id => "render-comment-form-#{rendered.id}", :class => "render-comment-form"}
+      = render :partial => 'comments/commentable', :object => rendered
+    = link_to_function 'Write Comment', "$('#render-comment-form-#{rendered.id} form').toggle()"

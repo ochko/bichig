@@ -1,4 +1,5 @@
 class RenderedExample < ActiveRecord::Base
+  acts_as_commentable
   belongs_to :file, :class_name => OtfFile.name
   belongs_to :example
 

@@ -263,3 +263,10 @@ td.view {
     font-weight: normal;
     font-size: 0.8em;
 }
+.render-comment-form form{
+    display: none;
+}
+textarea {
+    border: 2px solid #999 ;
+    border-radius: 4px;
+}
