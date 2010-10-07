@@ -4,4 +4,5 @@
       %td.mongolian= f.text_field :mongolian
       %td.cyrillic= f.text_field :cyrillic
       %td.glyphseq= f.text_field :glyphs, :id => "example-glyphs-#{@example.id}"
+      %td.category= f.select :category_name, Category.all.map {|c| c.name }, {:include_blank => 'Add Category'}
       %td{:colspan => 3}= f.submit "Save"

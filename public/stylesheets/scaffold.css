@@ -212,9 +212,11 @@ td.comment > p:first-child{
 .examples .mongolian {  vertical-align: center; width:220px; }
 .examples .cyrillic  {  vertical-align: center; width:100px;}
 .examples .glyphseq  {  width:300px;}
+.examples .category  {  width:200px;}
 .examples .mongolian  input { width:200px;}
 .examples .cyrillic   input { width:80px;}
 .examples .glyphseq   input { width:280px;}
+
 
 .correct {
     color: green;

@@ -7,7 +7,7 @@ class OtfFile < ActiveRecord::Base
   RENDER_CMD = "/usr/bin/pango-view --font='%s' --rotate=90 --gravity=north --dpi=150 -q -o %s.png %s"
 
   belongs_to :font, :class_name => OpenTypeFont.name
-  has_many :rendered_examples, :foreign_key => 'file_id'
+  has_many :rendered_examples, :foreign_key => 'file_id', :include => :example
   has_many :examples, :through => :rendered_examples
   
   def passed?

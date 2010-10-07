@@ -10,6 +10,14 @@ $(document).ready(function() {
                       .dialog({ autoOpen: false, title: 'Class', minWidth: 400});
    $("#font-tabs").tabs({cache:true, spinner: 'Loading...',
                         load:function(event, ui) {
+
+                            $(".category select").live('change', function(){
+                                                             if (this.value=='') {
+                                                                 var category_name = prompt("Input Category Name", '');
+                                                                 $(this).prepend('<option value="' + category_name + '">' + category_name + '</option>');
+                                                                 $(this).val(category_name);
+                                                             }
+                                                         });
                             $("a.unicode").click(function() {
                                $udialog.html('<img src="/images/spinner.gif"/>').dialog('open');
                                return true;
@@ -31,7 +39,12 @@ $(document).ready(function() {
                             });
                             $("#class-list").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
                             $("#font-editor").dialog();
-                            $(".file-list").tabs({cache:true}).addClass('ui-tabs-vertical-wide ui-helper-clearfix');
+                            $(".file-list").tabs({cache:true, load: function(even, ui){
+                                                      $("#rendered-accordion").accordion({   collapse: true,       
+                                                                                             header: "h3",
+                                                                                             active: false
+                                                                                         });
+                                                  } }).addClass('ui-tabs-vertical-wide ui-helper-clearfix');
    $(".file-list li").removeClass('ui-corner-top').addClass('ui-corner-left');
                         }});
    $(".feature-lookups").accordion({ collapsible: true, header: "h3", active: false, autoHeight: false}); 
@@ -41,3 +54,5 @@ $(document).ready(function() {
    $(".lookup-list li").removeClass('ui-corner-top').addClass('ui-corner-left');
 
 });
+
+

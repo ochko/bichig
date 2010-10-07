@@ -1,0 +1,8 @@
+%table.rendered-examples
+  %tr
+    %th{:width => "1%"}
+    %th Unicode<br/>text
+    %th Rendered<br/>Image
+    %th Correct<br/>Image
+    %th Cyrillic
+  = render :partial => 'rendered_examples/rendered', :collection => @rendered_examples

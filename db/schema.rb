@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101003184610) do
+ActiveRecord::Schema.define(:version => 20101006215828) do
+
+  create_table "categories", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "categories", ["name"], :name => "index_categories_on_name"
 
   create_table "classes_glyphs", :force => true do |t|
     t.integer "otf_class_id"
@@ -36,9 +42,10 @@ ActiveRecord::Schema.define(:version => 20101003184610) do
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "examples", :force => true do |t|
-    t.string "cyrillic"
-    t.string "mongolian"
-    t.text   "glyphs"
+    t.string  "cyrillic"
+    t.string  "mongolian"
+    t.text    "glyphs"
+    t.integer "category_id", :default => 1
   end
 
   create_table "languages", :force => true do |t|
